@@ -111,7 +111,9 @@ interface CompatibilityResult {
 }
 
 const Compatibility = () => {
-  const [mode, setMode] = useState<'personal' | 'business'>('personal');
+  const [mode, setMode] = useState<'partner' | 'client'>('partner');
+  const [entity1Type, setEntity1Type] = useState<'person' | 'corporate'>('person');
+  const [entity2Type, setEntity2Type] = useState<'person' | 'corporate'>('person');
   const [person1Name, setPerson1Name] = useState('');
   const [person1Birthdate, setPerson1Birthdate] = useState('');
   const [person2Name, setPerson2Name] = useState('');
@@ -125,11 +127,16 @@ const Compatibility = () => {
     setTimeout(() => {
       let num1: number, num2: number;
       
-      if (mode === 'personal' && person1Birthdate && person2Birthdate) {
+      // For persons with birthdate, use Life Path; for corporate or no birthdate, use Name Number
+      if (entity1Type === 'person' && person1Birthdate) {
         num1 = calculateLifePath(person1Birthdate);
-        num2 = calculateLifePath(person2Birthdate);
       } else {
         num1 = calculateNameNumber(person1Name);
+      }
+      
+      if (entity2Type === 'person' && person2Birthdate) {
+        num2 = calculateLifePath(person2Birthdate);
+      } else {
         num2 = calculateNameNumber(person2Name);
       }
       
@@ -154,12 +161,15 @@ const Compatibility = () => {
     setPerson1Birthdate('');
     setPerson2Name('');
     setPerson2Birthdate('');
+    setEntity1Type('person');
+    setEntity2Type('person');
     setResult(null);
   };
 
-  const isValid = mode === 'personal' 
-    ? person1Name && person1Birthdate && person2Name && person2Birthdate
-    : person1Name && person2Name;
+  // Validation: name required for both; birthdate required only for person type
+  const isEntity1Valid = entity1Type === 'corporate' ? person1Name : (person1Name && person1Birthdate);
+  const isEntity2Valid = entity2Type === 'corporate' ? person2Name : (person2Name && person2Birthdate);
+  const isValid = isEntity1Valid && isEntity2Valid;
 
   const getScoreColor = (score: number) => {
     if (score >= 85) return 'text-green-400';
@@ -200,102 +210,130 @@ const Compatibility = () => {
             </div>
 
             <div className="max-w-2xl mx-auto">
-              <Tabs value={mode} onValueChange={(v) => { setMode(v as 'personal' | 'business'); setResult(null); }}>
+              <Tabs value={mode} onValueChange={(v) => { setMode(v as 'partner' | 'client'); setResult(null); handleReset(); }}>
                 <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger value="personal" className="gap-2">
-                    <Heart className="w-4 h-4" />
-                    Personal Partners
-                  </TabsTrigger>
-                  <TabsTrigger value="business" className="gap-2">
+                  <TabsTrigger value="partner" className="gap-2">
                     <Users className="w-4 h-4" />
-                    Business Clients
+                    Business Partner
+                  </TabsTrigger>
+                  <TabsTrigger value="client" className="gap-2">
+                    <Heart className="w-4 h-4" />
+                    Business Client
                   </TabsTrigger>
                 </TabsList>
 
                 <div className="mystic-card p-6 md:p-8">
-                  <TabsContent value="personal" className="mt-0">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-4">
-                        <h3 className="font-display font-semibold text-foreground">Person 1</h3>
+                  {/* Entity 1 Section */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h3 className="font-display font-semibold text-foreground">
+                        {mode === 'partner' ? 'You / Your Company' : 'Your Business'}
+                      </h3>
+                      
+                      {/* Entity Type Selector */}
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant={entity1Type === 'person' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => { setEntity1Type('person'); setPerson1Birthdate(''); }}
+                          className="flex-1"
+                        >
+                          Person
+                        </Button>
+                        <Button
+                          type="button"
+                          variant={entity1Type === 'corporate' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => { setEntity1Type('corporate'); setPerson1Birthdate(''); }}
+                          className="flex-1"
+                        >
+                          Corporate
+                        </Button>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="e1name">
+                          {entity1Type === 'person' ? 'Full Name' : 'Company Name'}
+                        </Label>
+                        <Input
+                          id="e1name"
+                          placeholder={entity1Type === 'person' ? 'Enter full name' : 'Enter company name'}
+                          value={person1Name}
+                          onChange={(e) => setPerson1Name(e.target.value)}
+                          className="bg-muted/50"
+                        />
+                      </div>
+
+                      {entity1Type === 'person' && (
                         <div className="space-y-2">
-                          <Label htmlFor="p1name">Full Name</Label>
+                          <Label htmlFor="e1birth">Birth Date</Label>
                           <Input
-                            id="p1name"
-                            placeholder="Enter full name"
-                            value={person1Name}
-                            onChange={(e) => setPerson1Name(e.target.value)}
-                            className="bg-muted/50"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="p1birth">Birth Date</Label>
-                          <Input
-                            id="p1birth"
+                            id="e1birth"
                             type="date"
                             value={person1Birthdate}
                             onChange={(e) => setPerson1Birthdate(e.target.value)}
                             className="bg-muted/50"
                           />
                         </div>
+                      )}
+                    </div>
+
+                    {/* Entity 2 Section */}
+                    <div className="space-y-4">
+                      <h3 className="font-display font-semibold text-foreground">
+                        {mode === 'partner' ? 'Partner' : 'Client'}
+                      </h3>
+                      
+                      {/* Entity Type Selector */}
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant={entity2Type === 'person' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => { setEntity2Type('person'); setPerson2Birthdate(''); }}
+                          className="flex-1"
+                        >
+                          Person
+                        </Button>
+                        <Button
+                          type="button"
+                          variant={entity2Type === 'corporate' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => { setEntity2Type('corporate'); setPerson2Birthdate(''); }}
+                          className="flex-1"
+                        >
+                          Corporate
+                        </Button>
                       </div>
 
-                      <div className="space-y-4">
-                        <h3 className="font-display font-semibold text-foreground">Person 2</h3>
+                      <div className="space-y-2">
+                        <Label htmlFor="e2name">
+                          {entity2Type === 'person' ? 'Full Name' : 'Company Name'}
+                        </Label>
+                        <Input
+                          id="e2name"
+                          placeholder={entity2Type === 'person' ? 'Enter full name' : 'Enter company name'}
+                          value={person2Name}
+                          onChange={(e) => setPerson2Name(e.target.value)}
+                          className="bg-muted/50"
+                        />
+                      </div>
+
+                      {entity2Type === 'person' && (
                         <div className="space-y-2">
-                          <Label htmlFor="p2name">Full Name</Label>
+                          <Label htmlFor="e2birth">Birth Date</Label>
                           <Input
-                            id="p2name"
-                            placeholder="Enter full name"
-                            value={person2Name}
-                            onChange={(e) => setPerson2Name(e.target.value)}
-                            className="bg-muted/50"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="p2birth">Birth Date</Label>
-                          <Input
-                            id="p2birth"
+                            id="e2birth"
                             type="date"
                             value={person2Birthdate}
                             onChange={(e) => setPerson2Birthdate(e.target.value)}
                             className="bg-muted/50"
                           />
                         </div>
-                      </div>
+                      )}
                     </div>
-                  </TabsContent>
-
-                  <TabsContent value="business" className="mt-0">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-4">
-                        <h3 className="font-display font-semibold text-foreground">You / Your Business</h3>
-                        <div className="space-y-2">
-                          <Label htmlFor="b1name">Name</Label>
-                          <Input
-                            id="b1name"
-                            placeholder="Your name or company name"
-                            value={person1Name}
-                            onChange={(e) => setPerson1Name(e.target.value)}
-                            className="bg-muted/50"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        <h3 className="font-display font-semibold text-foreground">Client / Partner</h3>
-                        <div className="space-y-2">
-                          <Label htmlFor="b2name">Name</Label>
-                          <Input
-                            id="b2name"
-                            placeholder="Client or partner name"
-                            value={person2Name}
-                            onChange={(e) => setPerson2Name(e.target.value)}
-                            className="bg-muted/50"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </TabsContent>
+                  </div>
 
                   <div className="flex gap-3 mt-6">
                     <Button
@@ -332,10 +370,10 @@ const Compatibility = () => {
                         <p className="text-lg font-medium text-foreground mt-2">{result.level}</p>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-4 text-center">
+                        <div className="grid grid-cols-3 gap-4 text-center">
                         <div className="p-4 rounded-lg bg-muted/30 border border-border">
                           <p className="text-xs text-muted-foreground mb-1">
-                            {mode === 'personal' ? 'Life Path' : 'Name Number'}
+                            {entity1Type === 'person' && person1Birthdate ? 'Life Path' : 'Name Number'}
                           </p>
                           <div className="number-orb mx-auto w-12 h-12 text-xl">
                             {result.person1Number}
@@ -349,7 +387,7 @@ const Compatibility = () => {
                         </div>
                         <div className="p-4 rounded-lg bg-muted/30 border border-border">
                           <p className="text-xs text-muted-foreground mb-1">
-                            {mode === 'personal' ? 'Life Path' : 'Name Number'}
+                            {entity2Type === 'person' && person2Birthdate ? 'Life Path' : 'Name Number'}
                           </p>
                           <div className="number-orb mx-auto w-12 h-12 text-xl">
                             {result.person2Number}
