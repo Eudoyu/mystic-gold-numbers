@@ -56,8 +56,8 @@ export default {
           glow: "hsl(var(--gold-glow))",
         },
         mystic: {
-          DEFAULT: "hsl(var(--mystic-purple))",
-          deep: "hsl(var(--deep-purple))",
+          DEFAULT: "hsl(var(--mystic-blue))",
+          deep: "hsl(var(--deep-blue))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
