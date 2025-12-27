@@ -21,10 +21,10 @@ const Header = () => {
   const location = useLocation();
 
   const navLinks = [
-    { href: '/', label: 'Calculator' },
-    { href: '/business-names', label: 'Business Names' },
-    { href: '/compatibility', label: 'Compatibility' },
+    { href: '/', label: 'Business Name' },
+    { href: '/compatibility', label: 'Compatibility Check' },
     { href: '/slogan-analyzer', label: 'Slogan Analyzer' },
+    { href: '/partner-check', label: 'Partner Check' },
   ];
 
   return (
@@ -45,8 +45,8 @@ const Header = () => {
             <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <Sparkles className="w-5 h-5 text-primary" />
             </div>
-            <span className="font-display text-xl font-semibold gold-text hidden sm:block">
-              Numerology Hub
+            <span className="font-display text-2xl font-bold gold-text hidden sm:block tracking-wide">
+              CALCULATOR
             </span>
           </Link>
 

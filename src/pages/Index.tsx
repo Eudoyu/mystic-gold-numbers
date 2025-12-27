@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
-import HeroCalculator from '@/components/HeroCalculator';
 import BusinessNameTool from '@/components/BusinessNameTool';
 import HowItWorks from '@/components/HowItWorks';
 import NumberMeanings from '@/components/NumberMeanings';
@@ -11,20 +10,20 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Numerology Calculator - Life Path, Expression & Business Name Analysis</title>
+        <title>Business Numerology Calculator - Name, Compatibility & Slogan Analysis</title>
         <meta 
           name="description" 
-          content="Free professional numerology calculator using Pythagorean and Chaldean systems. Calculate your Life Path, Expression, Soul Urge numbers and analyze business names for success." 
+          content="Free professional business numerology calculator using Pythagorean, Chaldean, and Gematria systems. Analyze business names, check partner compatibility, and evaluate slogans." 
         />
         <meta 
           name="keywords" 
-          content="numerology calculator, life path number, expression number, soul urge, chaldean numerology, pythagorean numerology, business name numerology, name analysis" 
+          content="business numerology calculator, chaldean numerology, pythagorean numerology, gematria, business name analysis, partner compatibility, slogan analyzer" 
         />
         <link rel="canonical" href="https://numerologyhub.com" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Numerology Calculator - Discover Your Numbers" />
-        <meta property="og:description" content="Unlock the mysteries of numbers with our professional numerology calculator. Calculate Life Path, Expression, and analyze business names." />
+        <meta property="og:title" content="Business Numerology Calculator" />
+        <meta property="og:description" content="Professional business numerology tools for analyzing names, checking compatibility, and evaluating marketing slogans." />
         <meta property="og:type" content="website" />
         
         {/* Structured Data */}
@@ -32,22 +31,22 @@ const Index = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Numerology Hub Calculator",
-            "description": "Professional numerology calculator for Life Path, Expression, Soul Urge numbers and business name analysis",
+            "name": "Business Numerology Calculator",
+            "description": "Professional business numerology calculator for name analysis, partner compatibility, and slogan evaluation",
             "url": "https://numerologyhub.com",
-            "applicationCategory": "LifestyleApplication",
+            "applicationCategory": "BusinessApplication",
             "offers": {
               "@type": "Offer",
               "price": "0",
               "priceCurrency": "USD"
             },
             "featureList": [
-              "Life Path Number Calculator",
-              "Expression Number Calculator", 
-              "Soul Urge Number Calculator",
               "Business Name Analyzer",
+              "Partner Compatibility Check",
+              "Slogan Analyzer",
               "Pythagorean System",
-              "Chaldean System"
+              "Chaldean System",
+              "Gematria System"
             ]
           })}
         </script>
@@ -57,9 +56,8 @@ const Index = () => {
         <Header />
         
         <main>
-          <HeroCalculator />
-          <HowItWorks />
           <BusinessNameTool />
+          <HowItWorks />
           <NumberMeanings />
           <FAQ />
         </main>
