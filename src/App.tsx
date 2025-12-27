@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import BusinessNames from "./pages/BusinessNames";
 import Compatibility from "./pages/Compatibility";
 import SloganAnalyzer from "./pages/SloganAnalyzer";
+import PartnerCheck from "./pages/PartnerCheck";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/business-names" element={<BusinessNames />} />
             <Route path="/compatibility" element={<Compatibility />} />
             <Route path="/slogan-analyzer" element={<SloganAnalyzer />} />
+            <Route path="/partner-check" element={<PartnerCheck />} />
             
             {/* Multilingual routes */}
             <Route path="/en/*" element={<Index />} />

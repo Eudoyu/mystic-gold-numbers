@@ -5,16 +5,30 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ExpertInsight from '@/components/ExpertInsight';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-// Chaldean mapping for slogan analysis
+// Numerology calculation maps
+const PYTHAGOREAN_MAP: Record<string, number> = {
+  a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9,
+  j: 1, k: 2, l: 3, m: 4, n: 5, o: 6, p: 7, q: 8, r: 9,
+  s: 1, t: 2, u: 3, v: 4, w: 5, x: 6, y: 7, z: 8
+};
+
 const CHALDEAN_MAP: Record<string, number> = {
   a: 1, b: 2, c: 3, d: 4, e: 5, f: 8, g: 3, h: 5, i: 1,
   j: 1, k: 2, l: 3, m: 4, n: 5, o: 7, p: 8, q: 1, r: 2,
   s: 3, t: 4, u: 6, v: 6, w: 6, x: 5, y: 1, z: 7
 };
+
+const GEMATRIA_MAP: Record<string, number> = {
+  a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9,
+  j: 10, k: 20, l: 30, m: 40, n: 50, o: 60, p: 70, q: 80, r: 90,
+  s: 100, t: 200, u: 300, v: 400, w: 500, x: 600, y: 700, z: 800
+};
+
+type CalculationSystem = 'pythagorean' | 'chaldean' | 'gematria';
 
 const reduceToSingleDigit = (num: number): number => {
   if (num === 11 || num === 22 || num === 33) return num;
@@ -25,16 +39,17 @@ const reduceToSingleDigit = (num: number): number => {
   return num;
 };
 
-const calculateSloganVibration = (slogan: string): { number: number; breakdown: string; wordBreakdown: string[] } => {
+const calculateSloganVibration = (slogan: string, system: CalculationSystem): { number: number; breakdown: string; wordBreakdown: string[] } => {
   const words = slogan.toLowerCase().split(/\s+/).filter(w => w.length > 0);
   const wordBreakdown: string[] = [];
+  const map = system === 'pythagorean' ? PYTHAGOREAN_MAP : system === 'chaldean' ? CHALDEAN_MAP : GEMATRIA_MAP;
   let totalSum = 0;
 
   for (const word of words) {
     const cleanWord = word.replace(/[^a-z]/g, '');
     let wordSum = 0;
     for (const letter of cleanWord) {
-      wordSum += CHALDEAN_MAP[letter] || 0;
+      wordSum += map[letter] || 0;
     }
     const reducedWord = reduceToSingleDigit(wordSum);
     wordBreakdown.push(`"${word}" = ${wordSum} → ${reducedWord}`);
@@ -124,9 +139,11 @@ interface SloganResult {
   breakdown: string;
   wordBreakdown: string[];
   meaning: { energy: string; marketingPower: string; bestFor: string[] };
+  system: CalculationSystem;
 }
 
 const SloganAnalyzer = () => {
+  const [system, setSystem] = useState<CalculationSystem>('chaldean');
   const [slogan, setSlogan] = useState('');
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<SloganResult | null>(null);
@@ -138,7 +155,7 @@ const SloganAnalyzer = () => {
     setIsCalculating(true);
     
     setTimeout(() => {
-      const vibration = calculateSloganVibration(slogan);
+      const vibration = calculateSloganVibration(slogan, system);
       const meaning = getSloganMeaning(vibration.number);
       
       const newResult: SloganResult = {
@@ -146,7 +163,8 @@ const SloganAnalyzer = () => {
         number: vibration.number,
         breakdown: vibration.breakdown,
         wordBreakdown: vibration.wordBreakdown,
-        meaning
+        meaning,
+        system
       };
       
       setResult(newResult);
@@ -171,7 +189,7 @@ const SloganAnalyzer = () => {
         <title>Slogan Analyzer - Marketing Phrase Numerology Calculator</title>
         <meta 
           name="description" 
-          content="Analyze the vibrational energy of your marketing slogans and taglines. Discover which phrases have the most power to attract customers and drive success." 
+          content="Analyze the vibrational energy of your marketing slogans and taglines using Pythagorean, Chaldean, or Gematria numerology." 
         />
         <link rel="canonical" href="https://numerologyhub.com/slogan-analyzer" />
       </Helmet>
@@ -192,18 +210,29 @@ const SloganAnalyzer = () => {
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Calculate the vibrational energy of your marketing phrases and taglines 
-                to maximize their impact and customer attraction.
+                to maximize their impact.
               </p>
             </div>
 
             <div className="max-w-2xl mx-auto">
+              {/* System Selection */}
+              <Tabs value={system} onValueChange={(v) => { setSystem(v as CalculationSystem); setResult(null); }} className="mb-6">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="pythagorean">Pythagorean</TabsTrigger>
+                  <TabsTrigger value="chaldean">Chaldean</TabsTrigger>
+                  <TabsTrigger value="gematria">Gematria</TabsTrigger>
+                </TabsList>
+              </Tabs>
+
               <div className="mystic-card p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
                   <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
                     <Zap className="w-5 h-5 text-accent" />
                   </div>
                   <div>
-                    <h2 className="font-display font-semibold text-foreground">Chaldean Slogan Analysis</h2>
+                    <h2 className="font-display font-semibold text-foreground">
+                      {system === 'pythagorean' ? 'Pythagorean' : system === 'chaldean' ? 'Chaldean' : 'Gematria'} Slogan Analysis
+                    </h2>
                     <p className="text-xs text-muted-foreground">Analyze the vibrational power of marketing phrases</p>
                   </div>
                 </div>
@@ -251,7 +280,7 @@ const SloganAnalyzer = () => {
                 {result && (
                   <div className="mt-8 space-y-6 animate-fade-in">
                     <div className="text-center p-6 rounded-xl bg-background/50 border border-border">
-                      <p className="text-sm text-muted-foreground mb-2">Vibrational Number</p>
+                      <p className="text-sm text-muted-foreground mb-2 capitalize">{result.system} Number</p>
                       <div className="number-orb mx-auto mb-3 w-20 h-20 text-3xl">
                         {result.number}
                       </div>
@@ -312,7 +341,7 @@ const SloganAnalyzer = () => {
                     </div>
 
                     <ExpertInsight 
-                      method="chaldean" 
+                      method={system === 'gematria' ? 'pythagorean' : system} 
                       number={result.number} 
                       context="slogan" 
                     />
@@ -326,7 +355,10 @@ const SloganAnalyzer = () => {
                   <div className="space-y-3">
                     {savedSlogans.map((saved, index) => (
                       <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/30 border border-border">
-                        <span className="text-sm text-foreground">"{saved.slogan}"</span>
+                        <div>
+                          <span className="text-sm text-foreground">"{saved.slogan}"</span>
+                          <span className="text-xs text-muted-foreground ml-2 capitalize">({saved.system})</span>
+                        </div>
                         <div className="number-orb w-8 h-8 text-sm">
                           {saved.number}
                         </div>

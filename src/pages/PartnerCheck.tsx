@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Building2, Users, ArrowRight, Loader2, RotateCcw, Sparkles } from 'lucide-react';
+import { Users, ArrowRight, Loader2, RotateCcw, Sparkles } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ExpertInsight from '@/components/ExpertInsight';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Numerology calculation maps
 const PYTHAGOREAN_MAP: Record<string, number> = {
@@ -47,6 +47,14 @@ const calculateNameNumber = (name: string, system: CalculationSystem): number =>
     total += map[letter] || 0;
   }
   return reduceToSingleDigit(total);
+};
+
+const calculateLifePath = (birthdate: string): number => {
+  const [year, month, day] = birthdate.split('-').map(Number);
+  const dayReduced = reduceToSingleDigit(day);
+  const monthReduced = reduceToSingleDigit(month);
+  const yearReduced = reduceToSingleDigit(String(year).split('').reduce((sum, d) => sum + parseInt(d), 0));
+  return reduceToSingleDigit(dayReduced + monthReduced + yearReduced);
 };
 
 const getCompatibilityScore = (num1: number, num2: number): { score: number; level: string; description: string } => {
@@ -107,18 +115,21 @@ const getCompatibilityScore = (num1: number, num2: number): { score: number; lev
 };
 
 interface CompatibilityResult {
-  entity1Number: number;
-  entity2Number: number;
+  person1Number: number;
+  person2Number: number;
   score: number;
   level: string;
   description: string;
   combinedNumber: number;
 }
 
-const Compatibility = () => {
-  const [system, setSystem] = useState<CalculationSystem>('chaldean');
-  const [entity1Name, setEntity1Name] = useState('');
-  const [entity2Name, setEntity2Name] = useState('');
+const PartnerCheck = () => {
+  const [system, setSystem] = useState<CalculationSystem>('pythagorean');
+  const [partnerType, setPartnerType] = useState<'associate' | 'client'>('associate');
+  const [person1Name, setPerson1Name] = useState('');
+  const [person1Birthdate, setPerson1Birthdate] = useState('');
+  const [person2Name, setPerson2Name] = useState('');
+  const [person2Birthdate, setPerson2Birthdate] = useState('');
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<CompatibilityResult | null>(null);
 
@@ -126,15 +137,16 @@ const Compatibility = () => {
     setIsCalculating(true);
     
     setTimeout(() => {
-      const num1 = calculateNameNumber(entity1Name, system);
-      const num2 = calculateNameNumber(entity2Name, system);
+      // Use Life Path for person compatibility
+      const num1 = calculateLifePath(person1Birthdate);
+      const num2 = calculateLifePath(person2Birthdate);
       
       const compatibility = getCompatibilityScore(num1, num2);
       const combined = reduceToSingleDigit(num1 + num2);
       
       setResult({
-        entity1Number: num1,
-        entity2Number: num2,
+        person1Number: num1,
+        person2Number: num2,
         score: compatibility.score,
         level: compatibility.level,
         description: compatibility.description,
@@ -146,12 +158,14 @@ const Compatibility = () => {
   };
 
   const handleReset = () => {
-    setEntity1Name('');
-    setEntity2Name('');
+    setPerson1Name('');
+    setPerson1Birthdate('');
+    setPerson2Name('');
+    setPerson2Birthdate('');
     setResult(null);
   };
 
-  const isValid = entity1Name.trim() && entity2Name.trim();
+  const isValid = person1Name && person1Birthdate && person2Name && person2Birthdate;
 
   const getScoreColor = (score: number) => {
     if (score >= 85) return 'text-green-400';
@@ -163,12 +177,12 @@ const Compatibility = () => {
   return (
     <>
       <Helmet>
-        <title>Business Compatibility Check - Company Name Numerology</title>
+        <title>Partner Check - Business Partner & Client Compatibility</title>
         <meta 
           name="description" 
-          content="Check numerological compatibility between two business names, brands, or companies. Analyze partnership potential using Pythagorean, Chaldean, or Gematria systems." 
+          content="Check numerological compatibility between business partners or with clients. Person to person analysis using birthdate and name." 
         />
-        <link rel="canonical" href="https://numerologyhub.com/compatibility" />
+        <link rel="canonical" href="https://numerologyhub.com/partner-check" />
       </Helmet>
 
       <div className="min-h-screen">
@@ -178,22 +192,22 @@ const Compatibility = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                <Building2 className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Business Compatibility</span>
+                <Users className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-primary">Partner Check</span>
               </div>
               
               <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 gold-text">
-                Compatibility Check
+                Partner Compatibility
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Analyze numerological compatibility between two business names, brands, 
-                or companies to evaluate partnership potential.
+                Analyze numerological compatibility between you and your business partner or client.
+                Person to person analysis using Life Path numbers.
               </p>
             </div>
 
             <div className="max-w-2xl mx-auto">
               {/* System Selection */}
-              <Tabs value={system} onValueChange={(v) => { setSystem(v as CalculationSystem); setResult(null); }} className="mb-6">
+              <Tabs value={system} onValueChange={(v) => setSystem(v as CalculationSystem)} className="mb-6">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="pythagorean">Pythagorean</TabsTrigger>
                   <TabsTrigger value="chaldean">Chaldean</TabsTrigger>
@@ -201,43 +215,81 @@ const Compatibility = () => {
                 </TabsList>
               </Tabs>
 
-              <div className="mystic-card p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Users className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <h2 className="font-display font-semibold text-foreground">
-                      {system === 'pythagorean' ? 'Pythagorean' : system === 'chaldean' ? 'Chaldean' : 'Gematria'} Compatibility
-                    </h2>
-                    <p className="text-xs text-muted-foreground">Compare two business or brand names</p>
-                  </div>
-                </div>
+              {/* Partner Type Selection */}
+              <div className="flex gap-2 mb-6">
+                <Button
+                  type="button"
+                  variant={partnerType === 'associate' ? 'default' : 'outline'}
+                  onClick={() => setPartnerType('associate')}
+                  className="flex-1"
+                >
+                  <Users className="w-4 h-4 mr-2" />
+                  Business Associate
+                </Button>
+                <Button
+                  type="button"
+                  variant={partnerType === 'client' ? 'default' : 'outline'}
+                  onClick={() => setPartnerType('client')}
+                  className="flex-1"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Client
+                </Button>
+              </div>
 
+              <div className="mystic-card p-6 md:p-8">
                 <div className="grid md:grid-cols-2 gap-6">
+                  {/* Person 1 */}
                   <div className="space-y-4">
-                    <h3 className="font-display font-semibold text-foreground">Business 1</h3>
+                    <h3 className="font-display font-semibold text-foreground">You</h3>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="entity1">Company / Brand Name</Label>
+                      <Label htmlFor="p1name">Full Name</Label>
                       <Input
-                        id="entity1"
-                        placeholder="Enter first business name"
-                        value={entity1Name}
-                        onChange={(e) => setEntity1Name(e.target.value)}
+                        id="p1name"
+                        placeholder="Enter your full name"
+                        value={person1Name}
+                        onChange={(e) => setPerson1Name(e.target.value)}
+                        className="bg-muted/50"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="p1birth">Birth Date</Label>
+                      <Input
+                        id="p1birth"
+                        type="date"
+                        value={person1Birthdate}
+                        onChange={(e) => setPerson1Birthdate(e.target.value)}
                         className="bg-muted/50"
                       />
                     </div>
                   </div>
 
+                  {/* Person 2 */}
                   <div className="space-y-4">
-                    <h3 className="font-display font-semibold text-foreground">Business 2</h3>
+                    <h3 className="font-display font-semibold text-foreground">
+                      {partnerType === 'associate' ? 'Business Associate' : 'Client'}
+                    </h3>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="entity2">Company / Brand Name</Label>
+                      <Label htmlFor="p2name">Full Name</Label>
                       <Input
-                        id="entity2"
-                        placeholder="Enter second business name"
-                        value={entity2Name}
-                        onChange={(e) => setEntity2Name(e.target.value)}
+                        id="p2name"
+                        placeholder={`Enter ${partnerType === 'associate' ? 'partner' : 'client'}'s name`}
+                        value={person2Name}
+                        onChange={(e) => setPerson2Name(e.target.value)}
+                        className="bg-muted/50"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="p2birth">Birth Date</Label>
+                      <Input
+                        id="p2birth"
+                        type="date"
+                        value={person2Birthdate}
+                        onChange={(e) => setPerson2Birthdate(e.target.value)}
                         className="bg-muted/50"
                       />
                     </div>
@@ -263,13 +315,14 @@ const Compatibility = () => {
                     )}
                   </Button>
                   
-                  {(entity1Name || entity2Name || result) && (
+                  {(person1Name || person2Name || result) && (
                     <Button variant="outline" onClick={handleReset}>
                       <RotateCcw className="w-4 h-4" />
                     </Button>
                   )}
                 </div>
 
+                {/* Results */}
                 {result && (
                   <div className="mt-8 p-6 rounded-xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/20 animate-fade-in">
                     <div className="text-center mb-6">
@@ -281,16 +334,16 @@ const Compatibility = () => {
 
                     <div className="grid grid-cols-3 gap-4 mb-6">
                       <div className="text-center p-4 rounded-lg bg-muted/30">
-                        <div className="text-2xl font-bold text-primary">{result.entity1Number}</div>
-                        <div className="text-xs text-muted-foreground">Business 1</div>
+                        <div className="text-2xl font-bold text-primary">{result.person1Number}</div>
+                        <div className="text-xs text-muted-foreground">Your Number</div>
                       </div>
                       <div className="text-center p-4 rounded-lg bg-muted/30">
                         <div className="text-2xl font-bold text-primary">{result.combinedNumber}</div>
                         <div className="text-xs text-muted-foreground">Combined</div>
                       </div>
                       <div className="text-center p-4 rounded-lg bg-muted/30">
-                        <div className="text-2xl font-bold text-primary">{result.entity2Number}</div>
-                        <div className="text-xs text-muted-foreground">Business 2</div>
+                        <div className="text-2xl font-bold text-primary">{result.person2Number}</div>
+                        <div className="text-xs text-muted-foreground">{partnerType === 'associate' ? 'Partner' : 'Client'}'s Number</div>
                       </div>
                     </div>
 
@@ -306,13 +359,6 @@ const Compatibility = () => {
                   context="compatibility"
                 />
               )}
-
-              {/* Ad Placement */}
-              <div className="mt-8">
-                <div className="ad-placeholder h-[100px] flex items-center justify-center">
-                  <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • In-Content 728x100</span>
-                </div>
-              </div>
             </div>
           </div>
         </main>
@@ -323,4 +369,4 @@ const Compatibility = () => {
   );
 };
 
-export default Compatibility;
+export default PartnerCheck;
