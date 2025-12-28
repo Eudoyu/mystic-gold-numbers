@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AdPlacement from '@/components/AdPlacement';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,9 +33,7 @@ const Header = () => {
       {/* Top Ad Placement */}
       <div className="w-full bg-muted/50 py-2">
         <div className="container mx-auto px-4">
-          <div className="ad-placeholder h-[90px] flex items-center justify-center">
-            <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • Leaderboard 728x90</span>
-          </div>
+          <AdPlacement height="h-[90px]" label="AD-PLACEMENT-HIGH-CTR • Leaderboard 728x90" />
         </div>
       </div>
 

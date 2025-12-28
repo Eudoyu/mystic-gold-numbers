@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNumerology } from '@/hooks/useNumerology';
 import ResultsDisplay from './ResultsDisplay';
+import AdPlacement from '@/components/AdPlacement';
 
 const HeroCalculator = () => {
   const [name, setName] = useState('');
@@ -145,9 +146,7 @@ const HeroCalculator = () => {
 
         {/* Side Ad Placement */}
         <div className="hidden lg:block fixed right-4 top-1/2 -translate-y-1/2 w-[160px]">
-          <div className="ad-placeholder h-[600px] flex items-center justify-center">
-            <span className="text-xs uppercase tracking-wider writing-mode-vertical">AD-PLACEMENT-SIDEBAR • 160x600</span>
-          </div>
+          <AdPlacement height="h-[600px]" label="AD-PLACEMENT-SIDEBAR • 160x600" vertical />
         </div>
       </div>
     </section>

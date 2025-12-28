@@ -1,5 +1,6 @@
 import { Sparkles, Heart, Mail, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import AdPlacement from '@/components/AdPlacement';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -121,9 +122,7 @@ const Footer = () => {
       {/* Bottom Ad Placement */}
       <div className="bg-muted/30 py-4">
         <div className="container mx-auto px-4">
-          <div className="ad-placeholder h-[90px] flex items-center justify-center">
-            <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • Footer Leaderboard 728x90</span>
-          </div>
+          <AdPlacement height="h-[90px]" label="AD-PLACEMENT-HIGH-CTR • Footer Leaderboard 728x90" />
         </div>
       </div>
     </footer>
