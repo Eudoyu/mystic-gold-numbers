@@ -53,7 +53,7 @@ const BusinessNameTool = () => {
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="businessName" className="text-foreground">Business Name or Slogan</Label>
+                <Label htmlFor="businessName" className="text-foreground">Business Name</Label>
                 <Input
                   id="businessName"
                   type="text"
