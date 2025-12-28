@@ -34,7 +34,7 @@ const BusinessNameTool = () => {
             Analyze Your Business Name
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Test your company name, brand, or slogan against ancient Chaldean vibrations 
+            Test your company name or brand against ancient Chaldean vibrations 
             to ensure maximum success and alignment.
           </p>
         </div>
@@ -57,7 +57,7 @@ const BusinessNameTool = () => {
                 <Input
                   id="businessName"
                   type="text"
-                  placeholder="Enter your company name, brand, or slogan"
+                  placeholder="Enter your company name or brand"
                   value={businessName}
                   onChange={(e) => setBusinessName(e.target.value)}
                   className="bg-muted/50 border-border focus:border-accent focus:ring-accent/20"
