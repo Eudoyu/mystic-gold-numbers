@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import AdPlacement from '@/components/AdPlacement';
 
 const faqs = [
   {
@@ -89,9 +90,7 @@ const FAQ = () => {
 
         {/* Ad Placement */}
         <div className="max-w-3xl mx-auto mt-12">
-          <div className="ad-placeholder h-[250px] flex items-center justify-center">
-            <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • Medium Rectangle 300x250</span>
-          </div>
+          <AdPlacement height="h-[250px]" label="AD-PLACEMENT-HIGH-CTR • Medium Rectangle 300x250" />
         </div>
       </div>
     </section>

@@ -5,6 +5,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import AdPlacement from '@/components/AdPlacement';
 
 interface ResultsDisplayProps {
   result: NumerologyResult;
@@ -84,9 +85,7 @@ const ResultsDisplay = ({ result, system, name }: ResultsDisplayProps) => {
       </div>
 
       {/* Ad Placement between results */}
-      <div className="ad-placeholder h-[100px] flex items-center justify-center">
-        <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • In-Content 728x100</span>
-      </div>
+      <AdPlacement height="h-[100px]" label="AD-PLACEMENT-HIGH-CTR • In-Content 728x100" />
 
       <div className="grid gap-4">
         <ResultCard 
@@ -131,9 +130,7 @@ const ResultsDisplay = ({ result, system, name }: ResultsDisplayProps) => {
       </div>
 
       {/* Bottom Ad Placement */}
-      <div className="ad-placeholder h-[250px] flex items-center justify-center">
-        <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • Medium Rectangle 300x250</span>
-      </div>
+      <AdPlacement height="h-[250px]" label="AD-PLACEMENT-HIGH-CTR • Medium Rectangle 300x250" />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Star, Sparkles } from 'lucide-react';
+import AdPlacement from '@/components/AdPlacement';
 
 const numbers = [
   {
@@ -155,9 +156,7 @@ const NumberMeanings = () => {
         </div>
 
         {/* Ad Placement */}
-        <div className="ad-placeholder h-[100px] flex items-center justify-center mb-16">
-          <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • In-Content 728x100</span>
-        </div>
+        <AdPlacement height="h-[100px]" label="AD-PLACEMENT-HIGH-CTR • In-Content 728x100" className="mb-16" />
 
         {/* Master Numbers */}
         <div className="text-center mb-8">

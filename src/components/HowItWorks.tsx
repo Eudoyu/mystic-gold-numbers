@@ -1,4 +1,5 @@
 import { Wand2, Calculator, Lightbulb, Target } from 'lucide-react';
+import AdPlacement from '@/components/AdPlacement';
 
 const steps = [
   {
@@ -144,9 +145,7 @@ const HowItWorks = () => {
 
         {/* Ad Placement */}
         <div className="max-w-4xl mx-auto mt-12">
-          <div className="ad-placeholder h-[90px] flex items-center justify-center">
-            <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • Leaderboard 728x90</span>
-          </div>
+          <AdPlacement height="h-[90px]" label="AD-PLACEMENT-HIGH-CTR • Leaderboard 728x90" />
         </div>
       </div>
     </section>

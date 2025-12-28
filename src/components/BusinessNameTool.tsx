@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import AdPlacement from '@/components/AdPlacement';
 
 type CalculationSystem = 'pythagorean' | 'chaldean' | 'gematria';
 
@@ -217,9 +218,7 @@ const BusinessNameTool = () => {
 
         {/* Ad Placement */}
         <div className="max-w-2xl mx-auto mt-8">
-          <div className="ad-placeholder h-[100px] flex items-center justify-center">
-            <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • In-Content 728x100</span>
-          </div>
+          <AdPlacement height="h-[100px]" label="AD-PLACEMENT-HIGH-CTR • In-Content 728x100" />
         </div>
       </div>
     </section>

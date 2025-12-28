@@ -4,6 +4,7 @@ import { Building2, Sparkles, ArrowRight, Loader2, CheckCircle, AlertCircle, Rot
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ExpertInsight from '@/components/ExpertInsight';
+import AdPlacement from '@/components/AdPlacement';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -312,9 +313,7 @@ const BusinessNames = () => {
 
               {/* Ad Placement */}
               <div className="mt-8">
-                <div className="ad-placeholder h-[100px] flex items-center justify-center">
-                  <span className="text-xs uppercase tracking-wider">AD-PLACEMENT-HIGH-CTR • In-Content 728x100</span>
-                </div>
+                <AdPlacement height="h-[100px]" label="AD-PLACEMENT-HIGH-CTR • In-Content 728x100" />
               </div>
             </div>
           </div>
