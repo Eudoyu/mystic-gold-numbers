@@ -3,15 +3,90 @@ import { Building2, Sparkles, ArrowRight, Loader2, CheckCircle, AlertCircle } fr
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useNumerology } from '@/hooks/useNumerology';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+type CalculationSystem = 'pythagorean' | 'chaldean' | 'gematria';
+
+const PYTHAGOREAN_MAP: { [key: string]: number } = {
+  a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9,
+  j: 1, k: 2, l: 3, m: 4, n: 5, o: 6, p: 7, q: 8, r: 9,
+  s: 1, t: 2, u: 3, v: 4, w: 5, x: 6, y: 7, z: 8
+};
+
+const CHALDEAN_MAP: { [key: string]: number } = {
+  a: 1, b: 2, c: 3, d: 4, e: 5, f: 8, g: 3, h: 5, i: 1,
+  j: 1, k: 2, l: 3, m: 4, n: 5, o: 7, p: 8, q: 1, r: 2,
+  s: 3, t: 4, u: 6, v: 6, w: 6, x: 5, y: 1, z: 7
+};
+
+const GEMATRIA_MAP: { [key: string]: number } = {
+  a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9,
+  j: 10, k: 20, l: 30, m: 40, n: 50, o: 60, p: 70, q: 80, r: 90,
+  s: 100, t: 200, u: 300, v: 400, w: 500, x: 600, y: 700, z: 800
+};
+
+const reduceToSingleDigit = (num: number): number => {
+  while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+    num = String(num).split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+  }
+  return num;
+};
+
+const calculateNameNumber = (name: string, system: CalculationSystem): { number: number; breakdown: string } => {
+  const map = system === 'pythagorean' ? PYTHAGOREAN_MAP : system === 'chaldean' ? CHALDEAN_MAP : GEMATRIA_MAP;
+  const letters = name.toLowerCase().replace(/[^a-z]/g, '').split('');
+  const values = letters.map(l => map[l] || 0);
+  const total = values.reduce((sum, v) => sum + v, 0);
+  const breakdown = letters.map((l, i) => `${l.toUpperCase()}(${values[i]})`).join(' + ') + ` = ${total}`;
+  return { number: reduceToSingleDigit(total), breakdown: breakdown + ` → ${reduceToSingleDigit(total)}` };
+};
+
+const getVibrationMeaning = (num: number): { vibration: string; recommendation: string } => {
+  const meanings: { [key: number]: { vibration: string; recommendation: string } } = {
+    1: { vibration: "Leadership, independence, and pioneering energy. This number represents new beginnings and self-reliance.", recommendation: "Excellent for startups, solo ventures, and brands that want to be seen as innovative leaders in their field." },
+    2: { vibration: "Partnership, diplomacy, and cooperation. This number brings harmony and balance.", recommendation: "Great for consulting firms, partnerships, and businesses focused on relationships and collaboration." },
+    3: { vibration: "Creativity, communication, and expression. This number inspires joy and artistic energy.", recommendation: "Perfect for creative agencies, entertainment, marketing, and any business involving self-expression." },
+    4: { vibration: "Stability, structure, and hard work. This number represents solid foundations.", recommendation: "Ideal for construction, manufacturing, financial services, and businesses requiring trust and reliability." },
+    5: { vibration: "Change, freedom, and adventure. This number brings dynamic energy and versatility.", recommendation: "Excellent for travel, tech startups, media companies, and businesses embracing innovation and change." },
+    6: { vibration: "Nurturing, responsibility, and service. This number represents care and community.", recommendation: "Perfect for healthcare, hospitality, family businesses, and service-oriented companies." },
+    7: { vibration: "Wisdom, spirituality, and analysis. This number brings depth and introspection.", recommendation: "Great for research, education, spiritual services, and businesses requiring expertise and knowledge." },
+    8: { vibration: "Abundance, power, and material success. This number represents achievement and authority.", recommendation: "Excellent for finance, real estate, corporate enterprises, and ambitious ventures seeking growth." },
+    9: { vibration: "Humanitarianism, completion, and universal love. This number represents global impact.", recommendation: "Perfect for nonprofits, international businesses, and companies with a mission to serve humanity." },
+    11: { vibration: "Master Number - Intuition, inspiration, and spiritual insight. Highly charged energy.", recommendation: "Ideal for visionary companies, spiritual businesses, and brands seeking to inspire and illuminate." },
+    22: { vibration: "Master Number - Master Builder, turning dreams into reality. Powerful manifestation energy.", recommendation: "Excellent for large-scale projects, architecture, and businesses with ambitious global goals." },
+    33: { vibration: "Master Number - Master Teacher, compassion and healing. The highest vibration.", recommendation: "Perfect for healing practices, educational institutions, and businesses dedicated to uplifting humanity." }
+  };
+  return meanings[num] || meanings[reduceToSingleDigit(num)];
+};
+
+const systemInfo: { [key in CalculationSystem]: { title: string; description: string } } = {
+  pythagorean: { title: "Pythagorean Business Analysis", description: "Modern Western numerology system based on sequential letter values" },
+  chaldean: { title: "Chaldean Business Analysis", description: "Ancient Babylonian system preferred for business and brand names" },
+  gematria: { title: "Gematria Business Analysis", description: "Hebrew mystical tradition assigning values to letters" }
+};
+
+interface BusinessResult {
+  number: number;
+  vibration: string;
+  recommendation: string;
+  breakdown: string;
+}
 
 const BusinessNameTool = () => {
   const [businessName, setBusinessName] = useState('');
-  const { businessResult, isCalculating, calculateBusinessName, clearResults } = useNumerology();
+  const [system, setSystem] = useState<CalculationSystem>('chaldean');
+  const [isCalculating, setIsCalculating] = useState(false);
+  const [result, setResult] = useState<BusinessResult | null>(null);
 
   const handleAnalyze = () => {
     if (businessName.trim()) {
-      calculateBusinessName(businessName);
+      setIsCalculating(true);
+      setTimeout(() => {
+        const { number, breakdown } = calculateNameNumber(businessName, system);
+        const { vibration, recommendation } = getVibrationMeaning(number);
+        setResult({ number, vibration, recommendation, breakdown });
+        setIsCalculating(false);
+      }, 500);
     }
   };
 
@@ -34,9 +109,26 @@ const BusinessNameTool = () => {
             Analyze Your Business Name
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Test your company name or brand against ancient Chaldean vibrations 
+            Test your company name or brand against numerological vibrations 
             to ensure maximum success and alignment.
           </p>
+        </div>
+
+        {/* System Selection Tabs */}
+        <div className="max-w-2xl mx-auto mb-6">
+          <Tabs value={system} onValueChange={(v) => setSystem(v as CalculationSystem)} className="w-full">
+            <TabsList className="grid w-full grid-cols-3 bg-muted/50">
+              <TabsTrigger value="pythagorean" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Pythagorean
+              </TabsTrigger>
+              <TabsTrigger value="chaldean" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Chaldean
+              </TabsTrigger>
+              <TabsTrigger value="gematria" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Gematria
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
 
         <div className="max-w-2xl mx-auto">
@@ -46,8 +138,8 @@ const BusinessNameTool = () => {
                 <Sparkles className="w-5 h-5 text-accent" />
               </div>
               <div>
-                <h3 className="font-display font-semibold text-foreground">Chaldean Business Analysis</h3>
-                <p className="text-xs text-muted-foreground">Preferred system for business and brand names</p>
+                <h3 className="font-display font-semibold text-foreground">{systemInfo[system].title}</h3>
+                <p className="text-xs text-muted-foreground">{systemInfo[system].description}</p>
               </div>
             </div>
 
@@ -83,16 +175,13 @@ const BusinessNameTool = () => {
               </Button>
             </div>
 
-            {businessResult && (
+            {result && (
               <div className="mt-8 space-y-6 animate-fade-in">
                 <div className="text-center p-6 rounded-xl bg-background/50 border border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Chaldean Number</p>
+                  <p className="text-sm text-muted-foreground mb-2 capitalize">{system} Number</p>
                   <div className="number-orb mx-auto mb-3 w-20 h-20 text-3xl">
-                    {businessResult.chaldeanNumber}
+                    {result.number}
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Pythagorean: <span className="text-foreground">{businessResult.pythagoreanNumber}</span>
-                  </p>
                 </div>
 
                 <div className="space-y-4">
@@ -101,24 +190,24 @@ const BusinessNameTool = () => {
                       <Sparkles className="w-4 h-4 text-primary" />
                       Vibration Energy
                     </h4>
-                    <p className="text-sm text-muted-foreground">{businessResult.vibration}</p>
+                    <p className="text-sm text-muted-foreground">{result.vibration}</p>
                   </div>
 
                   <div className="p-4 rounded-lg bg-muted/30 border border-border">
                     <h4 className="font-display font-semibold text-foreground mb-2 flex items-center gap-2">
-                      {getVibrationType(businessResult.chaldeanNumber) === 'excellent' ? (
+                      {getVibrationType(result.number) === 'excellent' ? (
                         <CheckCircle className="w-4 h-4 text-green-500" />
                       ) : (
                         <AlertCircle className="w-4 h-4 text-accent" />
                       )}
                       Business Recommendation
                     </h4>
-                    <p className="text-sm text-muted-foreground">{businessResult.recommendation}</p>
+                    <p className="text-sm text-muted-foreground">{result.recommendation}</p>
                   </div>
 
                   <div className="p-4 rounded-lg bg-muted/30 border border-border">
                     <h4 className="font-display font-semibold text-foreground mb-2">Calculation Breakdown</h4>
-                    <p className="text-xs text-muted-foreground font-mono">{businessResult.breakdown}</p>
+                    <p className="text-xs text-muted-foreground font-mono">{result.breakdown}</p>
                   </div>
                 </div>
               </div>
