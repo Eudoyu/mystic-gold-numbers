@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Calculadora de Numerología Empresarial - Analiza Nombres, Eslóganes y Compatibilidad",
+    "description": "Calculadora gratuita de numerología profesional. Analiza nombres de empresas, eslóganes de marketing y compatibilidad de socios usando sistemas Pitagórico, Caldeo y Gematría."
+  },
+  "nav": {
+    "home": "Inicio",
+    "businessName": "Nombre de Empresa",
+    "sloganAnalyzer": "Analizador de Eslogan",
+    "compatibility": "Compatibilidad",
+    "partnerCheck": "Análisis de Socio",
+    "methods": "Métodos",
+    "resources": "Recursos",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "badge": "Numerología Empresarial",
+    "title": "Analiza el Nombre de tu Empresa",
+    "subtitle": "Prueba el nombre de tu empresa o marca contra las vibraciones numerológicas para asegurar el máximo éxito y alineación."
+  },
+  "calculator": {
+    "businessName": "Nombre de Empresa",
+    "placeholder": "Ingresa el nombre de tu empresa o marca",
+    "analyze": "Analizar Nombre",
+    "analyzing": "Analizando...",
+    "reset": "Reiniciar"
+  },
+  "systems": {
+    "pythagorean": "Pitagórico",
+    "chaldean": "Caldeo",
+    "gematria": "Gematría",
+    "pythagoreanDesc": "Sistema occidental moderno basado en valores secuenciales de letras",
+    "chaldeanDesc": "Sistema babilónico antiguo preferido para nombres de empresas",
+    "gematriaDesc": "Tradición mística hebrea que asigna valores a las letras"
+  },
+  "results": {
+    "number": "Número",
+    "vibrationEnergy": "Energía Vibracional",
+    "businessRecommendation": "Recomendación de Negocio",
+    "calculationBreakdown": "Desglose del Cálculo"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Todo lo que necesitas saber sobre numerología y cómo usar nuestras calculadoras para insights personales y de negocio."
+  },
+  "footer": {
+    "tagline": "Descubre los misterios de los números con nuestras calculadoras de numerología profesionales.",
+    "calculators": "Calculadoras",
+    "resources": "Recursos",
+    "legal": "Legal",
+    "copyright": "Todos los derechos reservados.",
+    "madeWith": "Hecho con amor para los buscadores de la verdad"
+  },
+  "legal": {
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "cookies": "Política de Cookies",
+    "disclaimer": "Aviso Legal",
+    "imprint": "Aviso Legal"
+  },
+  "newsletter": {
+    "title": "Mantente Actualizado",
+    "subtitle": "Recibe insights de numerología semanales y nuevas herramientas directamente en tu correo.",
+    "emailPlaceholder": "Ingresa tu email",
+    "subscribe": "Suscribirse",
+    "consent": "Acepto recibir correos de marketing. Puedes darte de baja en cualquier momento.",
+    "success": "¡Gracias por suscribirte!",
+    "privacyNote": "Respetamos tu privacidad. Lee nuestra"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "tryAgain": "Intentar de nuevo",
+    "learnMore": "Saber más",
+    "getStarted": "Comenzar"
+  }
+}

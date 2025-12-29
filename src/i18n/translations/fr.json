@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Calculateur de Numérologie d'Entreprise - Analysez Noms, Slogans & Compatibilité",
+    "description": "Calculateur gratuit de numérologie professionnelle. Analysez les noms d'entreprise, slogans marketing et compatibilité de partenaires avec les systèmes Pythagoricien, Chaldéen et Gématria."
+  },
+  "nav": {
+    "home": "Accueil",
+    "businessName": "Nom d'Entreprise",
+    "sloganAnalyzer": "Analyseur de Slogan",
+    "compatibility": "Compatibilité",
+    "partnerCheck": "Analyse Partenaire",
+    "methods": "Méthodes",
+    "resources": "Ressources",
+    "about": "À Propos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Numérologie d'Entreprise",
+    "title": "Analysez Votre Nom d'Entreprise",
+    "subtitle": "Testez le nom de votre société ou marque selon les vibrations numérologiques pour assurer succès et alignement maximum."
+  },
+  "calculator": {
+    "businessName": "Nom d'Entreprise",
+    "placeholder": "Entrez le nom de votre société ou marque",
+    "analyze": "Analyser le Nom",
+    "analyzing": "Analyse en cours...",
+    "reset": "Réinitialiser"
+  },
+  "systems": {
+    "pythagorean": "Pythagoricien",
+    "chaldean": "Chaldéen",
+    "gematria": "Gématria",
+    "pythagoreanDesc": "Système occidental moderne basé sur les valeurs séquentielles des lettres",
+    "chaldeanDesc": "Système babylonien ancien préféré pour les noms d'entreprise",
+    "gematriaDesc": "Tradition mystique hébraïque assignant des valeurs aux lettres"
+  },
+  "results": {
+    "number": "Nombre",
+    "vibrationEnergy": "Énergie Vibratoire",
+    "businessRecommendation": "Recommandation Business",
+    "calculationBreakdown": "Détail du Calcul"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Questions Fréquentes",
+    "subtitle": "Tout ce que vous devez savoir sur la numérologie et comment utiliser nos calculateurs pour des insights personnels et business."
+  },
+  "footer": {
+    "tagline": "Découvrez les mystères des nombres avec nos calculateurs de numérologie professionnels.",
+    "calculators": "Calculateurs",
+    "resources": "Ressources",
+    "legal": "Mentions Légales",
+    "copyright": "Tous droits réservés.",
+    "madeWith": "Fait avec amour pour les chercheurs de vérité"
+  },
+  "legal": {
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "cookies": "Politique des Cookies",
+    "disclaimer": "Avertissement",
+    "imprint": "Mentions Légales"
+  },
+  "newsletter": {
+    "title": "Restez Informé",
+    "subtitle": "Recevez des insights numérologie hebdomadaires et les nouveaux outils directement dans votre boîte mail.",
+    "emailPlaceholder": "Entrez votre email",
+    "subscribe": "S'abonner",
+    "consent": "J'accepte de recevoir des emails marketing. Vous pouvez vous désinscrire à tout moment.",
+    "success": "Merci pour votre inscription !",
+    "privacyNote": "Nous respectons votre vie privée. Lisez notre"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "tryAgain": "Réessayer",
+    "learnMore": "En savoir plus",
+    "getStarted": "Commencer"
+  }
+}
