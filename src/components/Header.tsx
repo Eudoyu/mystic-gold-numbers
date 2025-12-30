@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X, Globe, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AdPlacement from '@/components/AdPlacement';
+import { useLanguage, languages, type Language } from '@/i18n';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,23 +11,22 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-const languages = [
-  { code: 'en', label: 'English', flag: '🇬🇧' },
-  { code: 'fr', label: 'Français', flag: '🇫🇷' },
-  { code: 'es', label: 'Español', flag: '🇪🇸' },
-];
-
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('en');
-  const location = useLocation();
+  const { t, language, setLanguage, getLocalePath } = useLanguage();
 
   const navLinks = [
-    { href: '/', label: 'Business Name' },
-    { href: '/compatibility', label: 'Compatibility Check' },
-    { href: '/slogan-analyzer', label: 'Slogan Analyzer' },
-    { href: '/partner-check', label: 'Partner Check' },
+    { href: getLocalePath('/tools/business-name'), labelKey: 'nav.businessName' },
+    { href: getLocalePath('/tools/compatibility'), labelKey: 'nav.compatibility' },
+    { href: getLocalePath('/tools/slogan-analyzer'), labelKey: 'nav.sloganAnalyzer' },
+    { href: getLocalePath('/tools/partner-check'), labelKey: 'nav.partnerCheck' },
   ];
+
+  const handleLanguageChange = (langCode: Language) => {
+    setLanguage(langCode);
+  };
+
+  const currentLangData = languages.find(l => l.code === language);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -40,12 +40,12 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to={getLocalePath('/')} className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <Sparkles className="w-5 h-5 text-primary" />
             </div>
             <span className="font-display text-2xl font-bold gold-text hidden sm:block tracking-wide">
-              CALCULATOR
+              NUMEROLOGY
             </span>
           </Link>
 
@@ -57,7 +57,7 @@ const Header = () => {
                 to={link.href}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
               >
-                {link.label}
+                {t(link.labelKey)}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
               </Link>
             ))}
@@ -69,15 +69,16 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
                   <Globe className="w-4 h-4" />
-                  <span className="hidden sm:inline">{languages.find(l => l.code === currentLang)?.flag}</span>
+                  <span className="hidden sm:inline">{currentLangData?.flag}</span>
+                  <span className="hidden md:inline text-xs">{currentLangData?.label}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-card border-border">
                 {languages.map((lang) => (
                   <DropdownMenuItem
                     key={lang.code}
-                    onClick={() => setCurrentLang(lang.code)}
-                    className="cursor-pointer"
+                    onClick={() => handleLanguageChange(lang.code)}
+                    className={`cursor-pointer ${lang.code === language ? 'bg-primary/10' : ''}`}
                   >
                     <span className="mr-2">{lang.flag}</span>
                     {lang.label}
@@ -109,7 +110,7 @@ const Header = () => {
                   className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted/50 rounded-lg transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </Link>
               ))}
             </div>
