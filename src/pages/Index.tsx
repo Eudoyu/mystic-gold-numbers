@@ -4,50 +4,33 @@ import BusinessNameTool from '@/components/BusinessNameTool';
 import HowItWorks from '@/components/HowItWorks';
 import NumberMeanings from '@/components/NumberMeanings';
 import FAQ from '@/components/FAQ';
+import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/i18n';
 
 const Index = () => {
+  const { t, language } = useLanguage();
+  
   return (
     <>
       <Helmet>
-        <title>Business Numerology Calculator - Name, Compatibility & Slogan Analysis</title>
-        <meta 
-          name="description" 
-          content="Free professional business numerology calculator using Pythagorean, Chaldean, and Gematria systems. Analyze business names, check partner compatibility, and evaluate slogans." 
-        />
-        <meta 
-          name="keywords" 
-          content="business numerology calculator, chaldean numerology, pythagorean numerology, gematria, business name analysis, partner compatibility, slogan analyzer" 
-        />
-        <link rel="canonical" href="https://numerologyhub.com" />
+        <title>{t('meta.title')}</title>
+        <meta name="description" content={t('meta.description')} />
+        <link rel="canonical" href={`https://numerologyhub.com/${language}`} />
         
-        {/* Open Graph */}
-        <meta property="og:title" content="Business Numerology Calculator" />
-        <meta property="og:description" content="Professional business numerology tools for analyzing names, checking compatibility, and evaluating marketing slogans." />
+        <meta property="og:title" content={t('meta.title')} />
+        <meta property="og:description" content={t('meta.description')} />
         <meta property="og:type" content="website" />
         
-        {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
             "name": "Business Numerology Calculator",
-            "description": "Professional business numerology calculator for name analysis, partner compatibility, and slogan evaluation",
-            "url": "https://numerologyhub.com",
+            "description": t('meta.description'),
+            "url": `https://numerologyhub.com/${language}`,
             "applicationCategory": "BusinessApplication",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "featureList": [
-              "Business Name Analyzer",
-              "Partner Compatibility Check",
-              "Slogan Analyzer",
-              "Pythagorean System",
-              "Chaldean System",
-              "Gematria System"
-            ]
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
           })}
         </script>
       </Helmet>
@@ -60,6 +43,7 @@ const Index = () => {
           <HowItWorks />
           <NumberMeanings />
           <FAQ />
+          <Newsletter />
         </main>
         
         <Footer />

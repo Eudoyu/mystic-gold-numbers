@@ -12,6 +12,7 @@ import SloganAnalyzer from "./pages/SloganAnalyzer";
 import PartnerCheck from "./pages/PartnerCheck";
 import NotFound from "./pages/NotFound";
 import { Privacy, Terms, Cookies, Disclaimer } from "./pages/legal";
+import { Pythagorean, Chaldean, Gematria } from "./pages/methods";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,9 @@ const App = () => (
               <Route path="/en/tools/slogan-analyzer" element={<SloganAnalyzer />} />
               <Route path="/en/tools/compatibility" element={<Compatibility />} />
               <Route path="/en/tools/partner-check" element={<PartnerCheck />} />
+              <Route path="/en/methods/pythagorean" element={<Pythagorean />} />
+              <Route path="/en/methods/chaldean" element={<Chaldean />} />
+              <Route path="/en/methods/gematria" element={<Gematria />} />
               <Route path="/en/legal/privacy" element={<Privacy />} />
               <Route path="/en/legal/terms" element={<Terms />} />
               <Route path="/en/legal/cookies" element={<Cookies />} />
@@ -44,6 +48,9 @@ const App = () => (
               <Route path="/fr/tools/slogan-analyzer" element={<SloganAnalyzer />} />
               <Route path="/fr/tools/compatibility" element={<Compatibility />} />
               <Route path="/fr/tools/partner-check" element={<PartnerCheck />} />
+              <Route path="/fr/methods/pythagorean" element={<Pythagorean />} />
+              <Route path="/fr/methods/chaldean" element={<Chaldean />} />
+              <Route path="/fr/methods/gematria" element={<Gematria />} />
               <Route path="/fr/legal/privacy" element={<Privacy />} />
               <Route path="/fr/legal/terms" element={<Terms />} />
               <Route path="/fr/legal/cookies" element={<Cookies />} />
@@ -55,6 +62,9 @@ const App = () => (
               <Route path="/es/tools/slogan-analyzer" element={<SloganAnalyzer />} />
               <Route path="/es/tools/compatibility" element={<Compatibility />} />
               <Route path="/es/tools/partner-check" element={<PartnerCheck />} />
+              <Route path="/es/methods/pythagorean" element={<Pythagorean />} />
+              <Route path="/es/methods/chaldean" element={<Chaldean />} />
+              <Route path="/es/methods/gematria" element={<Gematria />} />
               <Route path="/es/legal/privacy" element={<Privacy />} />
               <Route path="/es/legal/terms" element={<Terms />} />
               <Route path="/es/legal/cookies" element={<Cookies />} />
