@@ -69,8 +69,7 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
                   <Globe className="w-4 h-4" />
-                  <span className="hidden sm:inline">{currentLangData?.flag}</span>
-                  <span className="hidden md:inline text-xs">{currentLangData?.label}</span>
+                  <span className="hidden sm:inline">{currentLangData?.label}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-card border-border">
@@ -80,7 +79,6 @@ const Header = () => {
                     onClick={() => handleLanguageChange(lang.code)}
                     className={`cursor-pointer ${lang.code === language ? 'bg-primary/10' : ''}`}
                   >
-                    <span className="mr-2">{lang.flag}</span>
                     {lang.label}
                   </DropdownMenuItem>
                 ))}
