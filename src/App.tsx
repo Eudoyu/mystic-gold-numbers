@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/i18n";
+import { ConsentProvider } from "@/contexts";
+import { useAdSense } from "@/hooks/useAdSense";
 import Index from "./pages/Index";
 import BusinessNames from "./pages/BusinessNames";
 import Compatibility from "./pages/Compatibility";
@@ -16,14 +18,22 @@ import { Pythagorean, Chaldean, Gematria } from "./pages/methods";
 
 const queryClient = new QueryClient();
 
+// AdSense loader component
+const AdSenseLoader = ({ children }: { children: React.ReactNode }) => {
+  useAdSense();
+  return <>{children}</>;
+};
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <LanguageProvider>
+      <ConsentProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <LanguageProvider>
+              <AdSenseLoader>
             <Routes>
               {/* Root redirect to English */}
               <Route path="/" element={<Navigate to="/en" replace />} />
@@ -77,10 +87,12 @@ const App = () => (
               <Route path="/partner-check" element={<Navigate to="/en/tools/partner-check" replace />} />
               
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </LanguageProvider>
-        </BrowserRouter>
-      </TooltipProvider>
+              </Routes>
+              </AdSenseLoader>
+            </LanguageProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ConsentProvider>
     </QueryClientProvider>
   </HelmetProvider>
 );

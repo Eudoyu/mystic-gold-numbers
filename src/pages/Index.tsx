@@ -6,6 +6,7 @@ import NumberMeanings from '@/components/NumberMeanings';
 import FAQ from '@/components/FAQ';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
+import AdSlot from '@/components/AdSlot';
 import { useLanguage } from '@/i18n';
 
 const Index = () => {
@@ -39,11 +40,33 @@ const Index = () => {
         <Header />
         
         <main>
+          {/* Ad slot: below header, before main content */}
+          <div className="container mx-auto px-4 py-4">
+            <AdSlot type="header" className="mb-4" />
+          </div>
+          
           <BusinessNameTool />
+          
+          {/* Ad slot: after calculator, before how it works */}
+          <div className="container mx-auto px-4">
+            <AdSlot type="inContent" className="my-8" />
+          </div>
+          
           <HowItWorks />
           <NumberMeanings />
+          
+          {/* Ad slot: after content, before FAQ */}
+          <div className="container mx-auto px-4">
+            <AdSlot type="afterResults" className="my-8" />
+          </div>
+          
           <FAQ />
           <Newsletter />
+          
+          {/* Ad slot: footer area */}
+          <div className="container mx-auto px-4 py-4">
+            <AdSlot type="footer" />
+          </div>
         </main>
         
         <Footer />
