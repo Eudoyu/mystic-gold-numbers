@@ -1,19 +1,23 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Globe, Sparkles } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, Globe, Sparkles, User, LogOut, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AdPlacement from '@/components/AdPlacement';
 import { useLanguage, languages, type Language } from '@/i18n';
+import { useAuth } from '@/contexts/AuthContext';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t, language, setLanguage, getLocalePath } = useLanguage();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const navLinks = [
     { href: getLocalePath('/tools/business-name'), labelKey: 'nav.businessName' },
@@ -24,6 +28,11 @@ const Header = () => {
 
   const handleLanguageChange = (langCode: Language) => {
     setLanguage(langCode);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate(getLocalePath('/'));
   };
 
   const currentLangData = languages.find(l => l.code === language);
@@ -63,8 +72,9 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Language Selector & Mobile Menu */}
+          {/* Language Selector, Auth & Mobile Menu */}
           <div className="flex items-center gap-2">
+            {/* Language Selector */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
@@ -84,6 +94,47 @@ const Header = () => {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
+
+            {/* User Menu */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <User className="w-4 h-4" />
+                    <span className="hidden sm:inline max-w-[100px] truncate">
+                      {user.email?.split('@')[0]}
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="bg-card border-border">
+                  <DropdownMenuItem
+                    onClick={() => navigate(getLocalePath('/history'))}
+                    className="cursor-pointer gap-2"
+                  >
+                    <History className="w-4 h-4" />
+                    My Readings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={handleSignOut}
+                    className="cursor-pointer gap-2 text-destructive"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate(getLocalePath('/auth'))}
+                className="gap-2 border-primary/30 hover:bg-primary/10"
+              >
+                <User className="w-4 h-4" />
+                <span className="hidden sm:inline">Sign In</span>
+              </Button>
+            )}
 
             {/* Mobile Menu Toggle */}
             <Button
@@ -111,6 +162,16 @@ const Header = () => {
                   {t(link.labelKey)}
                 </Link>
               ))}
+              {user && (
+                <Link
+                  to={getLocalePath('/history')}
+                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted/50 rounded-lg transition-colors flex items-center gap-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <History className="w-4 h-4" />
+                  My Readings
+                </Link>
+              )}
             </div>
           </nav>
         )}
