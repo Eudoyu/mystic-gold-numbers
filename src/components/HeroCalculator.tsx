@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { Sparkles, Calculator, ArrowRight, Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Sparkles, Calculator, ArrowRight, Loader2, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNumerology } from '@/hooks/useNumerology';
+import { useCalculationHistory } from '@/hooks/useCalculationHistory';
+import { useLanguage } from '@/i18n';
 import ResultsDisplay from './ResultsDisplay';
 import AdPlacement from '@/components/AdPlacement';
 
@@ -12,8 +15,12 @@ const HeroCalculator = () => {
   const [name, setName] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [system, setSystem] = useState<'pythagorean' | 'chaldean'>('pythagorean');
+  const [isSaving, setIsSaving] = useState(false);
   
   const { result, isCalculating, calculatePersonalNumbers, clearResults } = useNumerology();
+  const { saveCalculation, isLoggedIn } = useCalculationHistory();
+  const { getLocalePath } = useLanguage();
+  const navigate = useNavigate();
 
   const handleCalculate = () => {
     if (name && birthdate) {
@@ -25,6 +32,19 @@ const HeroCalculator = () => {
     setName('');
     setBirthdate('');
     clearResults();
+  };
+
+  const handleSave = async () => {
+    if (!result) return;
+    
+    if (!isLoggedIn) {
+      navigate(getLocalePath('/auth'));
+      return;
+    }
+
+    setIsSaving(true);
+    await saveCalculation(name, birthdate, system, result);
+    setIsSaving(false);
   };
 
   return (
@@ -125,13 +145,28 @@ const HeroCalculator = () => {
                 </Button>
                 
                 {result && (
-                  <Button
-                    variant="outline"
-                    onClick={handleReset}
-                    className="border-border hover:bg-muted/50"
-                  >
-                    Reset
-                  </Button>
+                  <>
+                    <Button
+                      variant="secondary"
+                      onClick={handleSave}
+                      disabled={isSaving}
+                      className="gap-2"
+                    >
+                      {isSaving ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Save className="w-4 h-4" />
+                      )}
+                      Save
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={handleReset}
+                      className="border-border hover:bg-muted/50"
+                    >
+                      Reset
+                    </Button>
+                  </>
                 )}
               </div>
             </div>
