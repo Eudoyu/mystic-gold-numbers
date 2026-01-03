@@ -7,8 +7,12 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNumerology } from '@/hooks/useNumerology';
 import { useCalculationHistory } from '@/hooks/useCalculationHistory';
+import { useUsageLimits } from '@/hooks/useUsageLimits';
 import { useLanguage } from '@/i18n';
+import { toast } from '@/hooks/use-toast';
 import ResultsDisplay from './ResultsDisplay';
+import ShareResults from './ShareResults';
+import UsageLimitBanner from './UsageLimitBanner';
 import AdPlacement from '@/components/AdPlacement';
 
 const HeroCalculator = () => {
@@ -19,13 +23,37 @@ const HeroCalculator = () => {
   
   const { result, isCalculating, calculatePersonalNumbers, clearResults } = useNumerology();
   const { saveCalculation, isLoggedIn } = useCalculationHistory();
+  const {
+    isPremium,
+    canCalculate,
+    canDownload,
+    canShare,
+    remainingCalculations,
+    remainingDownloads,
+    remainingShares,
+    incrementCalculation,
+    incrementDownload,
+    incrementShare,
+    limits,
+  } = useUsageLimits();
   const { getLocalePath } = useLanguage();
   const navigate = useNavigate();
 
   const handleCalculate = () => {
-    if (name && birthdate) {
-      calculatePersonalNumbers(name, birthdate, system);
+    if (!name || !birthdate) return;
+    
+    if (!canCalculate) {
+      toast({
+        title: 'Limit Reached',
+        description: 'Create a free account to get unlimited calculations.',
+        variant: 'destructive',
+      });
+      navigate(getLocalePath('/auth'));
+      return;
     }
+    
+    calculatePersonalNumbers(name, birthdate, system);
+    incrementCalculation();
   };
 
   const handleReset = () => {
@@ -66,6 +94,17 @@ const HeroCalculator = () => {
         </div>
 
         <div className="max-w-2xl mx-auto">
+          {/* Usage Limit Banner */}
+          <UsageLimitBanner
+            remainingCalculations={remainingCalculations}
+            remainingDownloads={remainingDownloads}
+            remainingShares={remainingShares}
+            isPremium={isPremium}
+            maxCalculations={limits.calculations}
+            maxDownloads={limits.downloads}
+            maxShares={limits.shares}
+          />
+          
           <div className="mystic-card p-6 md:p-8 animate-fade-in-up delay-200">
             <Tabs 
               value={system} 
@@ -146,6 +185,17 @@ const HeroCalculator = () => {
                 
                 {result && (
                   <>
+                    <ShareResults
+                      result={result}
+                      name={name}
+                      system={system}
+                      canDownload={canDownload}
+                      canShare={canShare}
+                      isPremium={isPremium}
+                      onDownload={incrementDownload}
+                      onShare={incrementShare}
+                      onUpgradeClick={() => navigate(getLocalePath('/auth'))}
+                    />
                     <Button
                       variant="secondary"
                       onClick={handleSave}

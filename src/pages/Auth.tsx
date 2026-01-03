@@ -7,10 +7,11 @@ import { useLanguage } from '@/i18n';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { Sparkles, Mail, Lock, User, ArrowLeft } from 'lucide-react';
+import { Sparkles, Mail, Lock, User, ArrowLeft, Crown, Download, Share2, Calculator, Check } from 'lucide-react';
 
 const emailSchema = z.string().email('Please enter a valid email address');
 const passwordSchema = z.string().min(6, 'Password must be at least 6 characters');
@@ -24,6 +25,7 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const [newsletter, setNewsletter] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState('login');
 
@@ -85,7 +87,7 @@ export default function Auth() {
     if (!validateForm(true)) return;
 
     setIsSubmitting(true);
-    const { error } = await signUp(email, password, displayName);
+    const { error } = await signUp(email, password, displayName, newsletter);
     setIsSubmitting(false);
 
     if (error) {
@@ -131,13 +133,33 @@ export default function Auth() {
           Back to Home
         </Button>
 
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-lg">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center p-3 rounded-full bg-primary/10 mb-4">
-              <Sparkles className="h-8 w-8 text-primary" />
+              <Crown className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-3xl font-display font-bold gold-text">Numerology Hub</h1>
-            <p className="text-muted-foreground mt-2">Sign in to save your readings</p>
+            <h1 className="text-3xl font-display font-bold gold-text">Unlock Premium Features</h1>
+            <p className="text-muted-foreground mt-2">Create a free account to access unlimited features</p>
+          </div>
+          
+          {/* Premium Benefits */}
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10">
+              <Calculator className="w-5 h-5 text-primary shrink-0" />
+              <span className="text-sm text-foreground">Unlimited calculations</span>
+            </div>
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10">
+              <Download className="w-5 h-5 text-primary shrink-0" />
+              <span className="text-sm text-foreground">PDF downloads</span>
+            </div>
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10">
+              <Share2 className="w-5 h-5 text-primary shrink-0" />
+              <span className="text-sm text-foreground">Share results</span>
+            </div>
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10">
+              <Sparkles className="w-5 h-5 text-primary shrink-0" />
+              <span className="text-sm text-foreground">Save readings</span>
+            </div>
           </div>
 
           <Card className="mystic-card border-primary/20">
@@ -246,12 +268,29 @@ export default function Auth() {
                     </div>
                   </div>
 
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/30 border border-border">
+                    <Checkbox
+                      id="newsletter"
+                      checked={newsletter}
+                      onCheckedChange={(checked) => setNewsletter(checked as boolean)}
+                      className="mt-0.5"
+                    />
+                    <div className="space-y-1">
+                      <Label htmlFor="newsletter" className="text-sm font-medium text-foreground cursor-pointer">
+                        Subscribe to newsletter
+                      </Label>
+                      <p className="text-xs text-muted-foreground">
+                        Get numerology tips, insights, and exclusive content delivered to your inbox.
+                      </p>
+                    </div>
+                  </div>
+
                   <Button 
                     type="submit" 
                     className="w-full glow-effect"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Creating Account...' : 'Create Account'}
+                    {isSubmitting ? 'Creating Account...' : 'Create Free Account'}
                   </Button>
                 </form>
               )}
