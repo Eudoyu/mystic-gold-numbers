@@ -3,11 +3,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/hooks/use-toast';
 
 interface NumerologyResult {
-  lifePathNumber: number;
-  expressionNumber: number;
-  soulUrgeNumber: number;
-  personalityNumber: number;
-  destinyNumber: number;
+  lifePath: number;
+  expression: number;
+  soulUrge: number;
+  personality: number;
+  destiny: number;
 }
 
 export function useCalculationHistory() {
@@ -26,11 +26,11 @@ export function useCalculationHistory() {
       name,
       birthdate,
       system,
-      life_path_number: result.lifePathNumber,
-      expression_number: result.expressionNumber,
-      soul_urge_number: result.soulUrgeNumber,
-      personality_number: result.personalityNumber,
-      destiny_number: result.destinyNumber,
+      life_path_number: result.lifePath,
+      expression_number: result.expression,
+      soul_urge_number: result.soulUrge,
+      personality_number: result.personality,
+      destiny_number: result.destiny,
     });
 
     if (error) {
