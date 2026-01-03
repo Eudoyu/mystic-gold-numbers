@@ -62,6 +62,7 @@ export type Database = {
           created_at: string
           display_name: string | null
           id: string
+          newsletter_subscribed: boolean | null
           updated_at: string
         }
         Insert: {
@@ -69,6 +70,7 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id: string
+          newsletter_subscribed?: boolean | null
           updated_at?: string
         }
         Update: {
@@ -76,7 +78,41 @@ export type Database = {
           created_at?: string
           display_name?: string | null
           id?: string
+          newsletter_subscribed?: boolean | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      usage_limits: {
+        Row: {
+          calculation_count: number | null
+          created_at: string
+          download_count: number | null
+          id: string
+          session_id: string
+          share_count: number | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          calculation_count?: number | null
+          created_at?: string
+          download_count?: number | null
+          id?: string
+          session_id: string
+          share_count?: number | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          calculation_count?: number | null
+          created_at?: string
+          download_count?: number | null
+          id?: string
+          session_id?: string
+          share_count?: number | null
+          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
