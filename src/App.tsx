@@ -11,6 +11,7 @@ import ConsentBanner from "@/components/ConsentBanner";
 import Index from "./pages/Index";
 import BusinessNames from "./pages/BusinessNames";
 import Compatibility from "./pages/Compatibility";
+import NameComparison from "./pages/NameComparison";
 import SloganAnalyzer from "./pages/SloganAnalyzer";
 import PartnerCheck from "./pages/PartnerCheck";
 import NotFound from "./pages/NotFound";
@@ -49,6 +50,7 @@ const App = () => (
                     <Route path="/en/tools/business-name" element={<BusinessNames />} />
                     <Route path="/en/tools/slogan-analyzer" element={<SloganAnalyzer />} />
                     <Route path="/en/tools/compatibility" element={<Compatibility />} />
+                    <Route path="/en/tools/name-comparison" element={<NameComparison />} />
                     <Route path="/en/tools/partner-check" element={<PartnerCheck />} />
                     <Route path="/en/methods/pythagorean" element={<Pythagorean />} />
                     <Route path="/en/methods/chaldean" element={<Chaldean />} />
@@ -65,6 +67,7 @@ const App = () => (
                     <Route path="/fr/tools/business-name" element={<BusinessNames />} />
                     <Route path="/fr/tools/slogan-analyzer" element={<SloganAnalyzer />} />
                     <Route path="/fr/tools/compatibility" element={<Compatibility />} />
+                    <Route path="/fr/tools/name-comparison" element={<NameComparison />} />
                     <Route path="/fr/tools/partner-check" element={<PartnerCheck />} />
                     <Route path="/fr/methods/pythagorean" element={<Pythagorean />} />
                     <Route path="/fr/methods/chaldean" element={<Chaldean />} />
@@ -81,6 +84,7 @@ const App = () => (
                     <Route path="/es/tools/business-name" element={<BusinessNames />} />
                     <Route path="/es/tools/slogan-analyzer" element={<SloganAnalyzer />} />
                     <Route path="/es/tools/compatibility" element={<Compatibility />} />
+                    <Route path="/es/tools/name-comparison" element={<NameComparison />} />
                     <Route path="/es/tools/partner-check" element={<PartnerCheck />} />
                     <Route path="/es/methods/pythagorean" element={<Pythagorean />} />
                     <Route path="/es/methods/chaldean" element={<Chaldean />} />
