@@ -24,6 +24,7 @@ const Header = () => {
     { href: getLocalePath('/tools/compatibility'), labelKey: 'nav.compatibility' },
     { href: getLocalePath('/tools/slogan-analyzer'), labelKey: 'nav.sloganAnalyzer' },
     { href: getLocalePath('/tools/partner-check'), labelKey: 'nav.partnerCheck' },
+    { href: getLocalePath('/tools/name-comparison'), labelKey: 'nav.nameComparison' },
   ];
 
   const handleLanguageChange = (langCode: Language) => {
