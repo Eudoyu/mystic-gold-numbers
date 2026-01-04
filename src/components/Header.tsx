@@ -25,6 +25,7 @@ const Header = () => {
     { href: getLocalePath('/tools/slogan-analyzer'), labelKey: 'nav.sloganAnalyzer' },
     { href: getLocalePath('/tools/partner-check'), labelKey: 'nav.partnerCheck' },
     { href: getLocalePath('/tools/name-comparison'), labelKey: 'nav.nameComparison' },
+    { href: getLocalePath('/blog'), labelKey: 'nav.blog' },
   ];
 
   const handleLanguageChange = (langCode: Language) => {

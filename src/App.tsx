@@ -17,6 +17,8 @@ import PartnerCheck from "./pages/PartnerCheck";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import History from "./pages/History";
+import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 import { Privacy, Terms, Cookies, Disclaimer } from "./pages/legal";
 import { Pythagorean, Chaldean, Gematria } from "./pages/methods";
 
@@ -47,6 +49,8 @@ const App = () => (
                     <Route path="/en" element={<Index />} />
                     <Route path="/en/auth" element={<Auth />} />
                     <Route path="/en/history" element={<History />} />
+                    <Route path="/en/blog" element={<Blog />} />
+                    <Route path="/en/blog/:slug" element={<BlogArticle />} />
                     <Route path="/en/tools/business-name" element={<BusinessNames />} />
                     <Route path="/en/tools/slogan-analyzer" element={<SloganAnalyzer />} />
                     <Route path="/en/tools/compatibility" element={<Compatibility />} />
@@ -57,13 +61,15 @@ const App = () => (
                     <Route path="/en/methods/gematria" element={<Gematria />} />
                     <Route path="/en/legal/privacy" element={<Privacy />} />
                     <Route path="/en/legal/terms" element={<Terms />} />
-                    <Route path="/en/legal/cookies" element={<Cookies />} />
                     <Route path="/en/legal/disclaimer" element={<Disclaimer />} />
+                    <Route path="/en/legal/cookies" element={<Cookies />} />
                     
                     {/* French routes */}
                     <Route path="/fr" element={<Index />} />
                     <Route path="/fr/auth" element={<Auth />} />
                     <Route path="/fr/history" element={<History />} />
+                    <Route path="/fr/blog" element={<Blog />} />
+                    <Route path="/fr/blog/:slug" element={<BlogArticle />} />
                     <Route path="/fr/tools/business-name" element={<BusinessNames />} />
                     <Route path="/fr/tools/slogan-analyzer" element={<SloganAnalyzer />} />
                     <Route path="/fr/tools/compatibility" element={<Compatibility />} />
@@ -81,6 +87,8 @@ const App = () => (
                     <Route path="/es" element={<Index />} />
                     <Route path="/es/auth" element={<Auth />} />
                     <Route path="/es/history" element={<History />} />
+                    <Route path="/es/blog" element={<Blog />} />
+                    <Route path="/es/blog/:slug" element={<BlogArticle />} />
                     <Route path="/es/tools/business-name" element={<BusinessNames />} />
                     <Route path="/es/tools/slogan-analyzer" element={<SloganAnalyzer />} />
                     <Route path="/es/tools/compatibility" element={<Compatibility />} />

@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import BusinessNameTool from '@/components/BusinessNameTool';
 import HowItWorks from '@/components/HowItWorks';
 import NumberMeanings from '@/components/NumberMeanings';
+import BlogPreview from '@/components/BlogPreview';
 import FAQ from '@/components/FAQ';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
@@ -55,10 +56,12 @@ const Index = () => {
           <HowItWorks />
           <NumberMeanings />
           
-          {/* Ad slot: after content, before FAQ */}
+          {/* Ad slot: after content, before blog */}
           <div className="container mx-auto px-4">
             <AdSlot type="afterResults" className="my-8" />
           </div>
+          
+          <BlogPreview />
           
           <FAQ />
           <Newsletter />
