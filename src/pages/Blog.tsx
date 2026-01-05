@@ -1,25 +1,73 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
+import { Calendar, Clock, User, Tag, ArrowRight, BookOpen, Sparkles, Search, X, Filter } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useLanguage } from '@/i18n';
 import { blogArticles, getFeaturedArticles, getAllCategories } from '@/data/blogArticles';
 
 const Blog = () => {
   const { getLocalePath } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
   
   const featuredArticles = getFeaturedArticles();
   const categories = getAllCategories();
   
-  const filteredArticles = selectedCategory 
-    ? blogArticles.filter(article => article.category === selectedCategory)
-    : blogArticles;
+  // Get all unique tags
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    blogArticles.forEach(article => {
+      article.tags.forEach(tag => tags.add(tag));
+    });
+    return Array.from(tags).sort();
+  }, []);
+  
+  // Filter articles based on search, category, and tags
+  const filteredArticles = useMemo(() => {
+    return blogArticles.filter(article => {
+      // Search filter
+      const searchLower = searchQuery.toLowerCase();
+      const matchesSearch = searchQuery === '' || 
+        article.title.toLowerCase().includes(searchLower) ||
+        article.excerpt.toLowerCase().includes(searchLower) ||
+        article.content.toLowerCase().includes(searchLower) ||
+        article.author.toLowerCase().includes(searchLower) ||
+        article.tags.some(tag => tag.toLowerCase().includes(searchLower));
+      
+      // Category filter
+      const matchesCategory = !selectedCategory || article.category === selectedCategory;
+      
+      // Tags filter
+      const matchesTags = selectedTags.length === 0 || 
+        selectedTags.every(tag => article.tags.includes(tag));
+      
+      return matchesSearch && matchesCategory && matchesTags;
+    });
+  }, [searchQuery, selectedCategory, selectedTags]);
+  
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
+  };
+  
+  const clearFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory(null);
+    setSelectedTags([]);
+  };
+  
+  const hasActiveFilters = searchQuery || selectedCategory || selectedTags.length > 0;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -68,7 +116,7 @@ const Blog = () => {
 
       <main className="min-h-screen pt-40 pb-20">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 mb-16">
+        <section className="container mx-auto px-4 mb-12">
           <div className="text-center max-w-4xl mx-auto">
             <Badge variant="outline" className="mb-4 px-4 py-1 border-primary/30 text-primary">
               <BookOpen className="w-3 h-3 mr-2" />
@@ -83,147 +131,271 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Featured Articles */}
-        <section className="container mx-auto px-4 mb-16">
-          <div className="flex items-center gap-2 mb-8">
-            <Sparkles className="w-5 h-5 text-primary" />
-            <h2 className="font-display text-2xl font-bold">Featured Articles</h2>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredArticles.slice(0, 3).map((article) => (
-              <Link key={article.id} to={getLocalePath(`/blog/${article.slug}`)}>
-                <Card className="mystic-card h-full hover:border-primary/50 transition-all duration-300 group overflow-hidden">
-                  <CardHeader className="pb-3">
-                    <Badge className="w-fit mb-3 bg-primary/20 text-primary border-0">
-                      {article.category}
-                    </Badge>
-                    <h3 className="font-display text-xl font-semibold group-hover:text-primary transition-colors line-clamp-2">
-                      {article.title}
-                    </h3>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                      {article.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {new Date(article.publishDate).toLocaleDateString()}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {article.readTime}
-                        </span>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* Categories Filter */}
+        {/* Search & Filter Section */}
         <section className="container mx-auto px-4 mb-8">
-          <div className="flex flex-wrap gap-2">
-            <Button
-              variant={selectedCategory === null ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedCategory(null)}
-              className={selectedCategory === null ? "bg-primary text-primary-foreground" : "border-border hover:bg-muted"}
-            >
-              All Articles
-            </Button>
-            {categories.map((category) => (
+          <div className="mystic-card p-4 md:p-6">
+            {/* Search Bar */}
+            <div className="relative mb-4">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search articles by title, content, author, or tags..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-10 bg-background border-border"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+            
+            {/* Filter Toggle & Active Filters */}
+            <div className="flex flex-wrap items-center gap-2 mb-4">
               <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
+                variant="outline"
                 size="sm"
-                onClick={() => setSelectedCategory(category)}
-                className={selectedCategory === category ? "bg-primary text-primary-foreground" : "border-border hover:bg-muted"}
+                onClick={() => setShowFilters(!showFilters)}
+                className="border-border"
               >
-                {category}
+                <Filter className="w-4 h-4 mr-2" />
+                Filters
+                {hasActiveFilters && (
+                  <Badge className="ml-2 bg-primary text-primary-foreground text-xs px-1.5">
+                    {(selectedCategory ? 1 : 0) + selectedTags.length}
+                  </Badge>
+                )}
               </Button>
-            ))}
+              
+              {hasActiveFilters && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearFilters}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <X className="w-4 h-4 mr-1" />
+                  Clear all
+                </Button>
+              )}
+              
+              {/* Active filter badges */}
+              {selectedCategory && (
+                <Badge 
+                  variant="secondary" 
+                  className="cursor-pointer hover:bg-destructive/20"
+                  onClick={() => setSelectedCategory(null)}
+                >
+                  {selectedCategory}
+                  <X className="w-3 h-3 ml-1" />
+                </Badge>
+              )}
+              {selectedTags.map(tag => (
+                <Badge 
+                  key={tag}
+                  variant="secondary" 
+                  className="cursor-pointer hover:bg-destructive/20"
+                  onClick={() => toggleTag(tag)}
+                >
+                  {tag}
+                  <X className="w-3 h-3 ml-1" />
+                </Badge>
+              ))}
+            </div>
+            
+            {/* Expandable Filters */}
+            {showFilters && (
+              <div className="space-y-4 pt-4 border-t border-border">
+                {/* Category Filter */}
+                <div>
+                  <h4 className="text-sm font-medium mb-2 text-muted-foreground">Categories</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      variant={selectedCategory === null ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setSelectedCategory(null)}
+                      className={selectedCategory === null ? "bg-primary text-primary-foreground" : "border-border hover:bg-muted"}
+                    >
+                      All
+                    </Button>
+                    {categories.map((category) => (
+                      <Button
+                        key={category}
+                        variant={selectedCategory === category ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedCategory(category)}
+                        className={selectedCategory === category ? "bg-primary text-primary-foreground" : "border-border hover:bg-muted"}
+                      >
+                        {category}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Tags Filter */}
+                <div>
+                  <h4 className="text-sm font-medium mb-2 text-muted-foreground">Tags</h4>
+                  <div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto">
+                    {allTags.map((tag) => (
+                      <button
+                        key={tag}
+                        onClick={() => toggleTag(tag)}
+                        className={`text-xs px-2 py-1 rounded-full transition-colors ${
+                          selectedTags.includes(tag)
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                        }`}
+                      >
+                        <Tag className="w-3 h-3 inline mr-1" />
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* All Articles */}
-        <section className="container mx-auto px-4">
-          <h2 className="font-display text-2xl font-bold mb-8">
-            {selectedCategory ? `${selectedCategory} Articles` : 'All Articles'}
-          </h2>
-          
-          <div className="grid gap-6">
-            {filteredArticles.map((article) => (
-              <Link key={article.id} to={getLocalePath(`/blog/${article.slug}`)}>
-                <Card className="mystic-card hover:border-primary/50 transition-all duration-300 group">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row gap-6">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <Badge className="bg-primary/20 text-primary border-0">
-                            {article.category}
-                          </Badge>
-                          {article.featured && (
-                            <Badge variant="outline" className="border-accent text-accent">
-                              <Sparkles className="w-3 h-3 mr-1" />
-                              Featured
-                            </Badge>
-                          )}
-                        </div>
-                        
-                        <h3 className="font-display text-xl md:text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
-                          {article.title}
-                        </h3>
-                        
-                        <p className="text-muted-foreground mb-4 line-clamp-2">
-                          {article.excerpt}
-                        </p>
-                        
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+        {/* Featured Articles - only show when no filters active */}
+        {!hasActiveFilters && (
+          <section className="container mx-auto px-4 mb-16">
+            <div className="flex items-center gap-2 mb-8">
+              <Sparkles className="w-5 h-5 text-primary" />
+              <h2 className="font-display text-2xl font-bold">Featured Articles</h2>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredArticles.slice(0, 3).map((article) => (
+                <Link key={article.id} to={getLocalePath(`/blog/${article.slug}`)}>
+                  <Card className="mystic-card h-full hover:border-primary/50 transition-all duration-300 group overflow-hidden">
+                    <CardHeader className="pb-3">
+                      <Badge className="w-fit mb-3 bg-primary/20 text-primary border-0">
+                        {article.category}
+                      </Badge>
+                      <h3 className="font-display text-xl font-semibold group-hover:text-primary transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                        {article.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1">
-                            <User className="w-4 h-4" />
-                            {article.author}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
+                            <Calendar className="w-3 h-3" />
                             {new Date(article.publishDate).toLocaleDateString()}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
+                            <Clock className="w-3 h-3" />
                             {article.readTime}
                           </span>
                         </div>
-                        
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          {article.tags.slice(0, 4).map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground"
-                            >
-                              <Tag className="w-3 h-3 inline mr-1" />
-                              {tag}
+                        <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* All Articles */}
+        <section className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-display text-2xl font-bold">
+              {hasActiveFilters 
+                ? `${filteredArticles.length} ${filteredArticles.length === 1 ? 'Result' : 'Results'}`
+                : 'All Articles'}
+            </h2>
+          </div>
+          
+          {filteredArticles.length === 0 ? (
+            <div className="text-center py-16">
+              <Search className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">No articles found</h3>
+              <p className="text-muted-foreground mb-4">
+                Try adjusting your search or filters to find what you're looking for.
+              </p>
+              <Button onClick={clearFilters} variant="outline">
+                Clear all filters
+              </Button>
+            </div>
+          ) : (
+            <div className="grid gap-6">
+              {filteredArticles.map((article) => (
+                <Link key={article.id} to={getLocalePath(`/blog/${article.slug}`)}>
+                  <Card className="mystic-card hover:border-primary/50 transition-all duration-300 group">
+                    <CardContent className="p-6">
+                      <div className="flex flex-col md:flex-row gap-6">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <Badge className="bg-primary/20 text-primary border-0">
+                              {article.category}
+                            </Badge>
+                            {article.featured && (
+                              <Badge variant="outline" className="border-accent text-accent">
+                                <Sparkles className="w-3 h-3 mr-1" />
+                                Featured
+                              </Badge>
+                            )}
+                          </div>
+                          
+                          <h3 className="font-display text-xl md:text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
+                            {article.title}
+                          </h3>
+                          
+                          <p className="text-muted-foreground mb-4 line-clamp-2">
+                            {article.excerpt}
+                          </p>
+                          
+                          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                            <span className="flex items-center gap-1">
+                              <User className="w-4 h-4" />
+                              {article.author}
                             </span>
-                          ))}
+                            <span className="flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              {new Date(article.publishDate).toLocaleDateString()}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              {article.readTime}
+                            </span>
+                          </div>
+                          
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {article.tags.slice(0, 4).map((tag) => (
+                              <span
+                                key={tag}
+                                className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground"
+                              >
+                                <Tag className="w-3 h-3 inline mr-1" />
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center">
+                          <Button variant="ghost" className="group-hover:text-primary group-hover:bg-primary/10">
+                            Read Article
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </Button>
                         </div>
                       </div>
-                      
-                      <div className="flex items-center">
-                        <Button variant="ghost" className="group-hover:text-primary group-hover:bg-primary/10">
-                          Read Article
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* SEO Content Section */}
