@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Calendar, Clock, User, Tag, ArrowLeft, Share2, BookOpen, ChevronRight } from 'lucide-react';
+import DOMPurify from 'dompurify';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,6 +10,14 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/i18n';
 import { getArticleBySlug, getRelatedArticles } from '@/data/blogArticles';
 import { toast } from 'sonner';
+
+// Configure DOMPurify to only allow safe formatting tags
+const sanitizeHtml = (html: string) => {
+  return DOMPurify.sanitize(html, { 
+    ALLOWED_TAGS: ['strong', 'em', 'b', 'i'],
+    ALLOWED_ATTR: ['class']
+  });
+};
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -109,7 +118,7 @@ const BlogArticle = () => {
         elements.push(
           <ListTag key={elements.length} className={`${listType === 'ol' ? 'list-decimal' : 'list-disc'} list-inside space-y-2 my-4 text-muted-foreground`}>
             {currentList.map((item, i) => (
-              <li key={i} dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>') }} />
+              <li key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground">$1</strong>')) }} />
             ))}
           </ListTag>
         );
@@ -220,7 +229,7 @@ const BlogArticle = () => {
         <p 
           key={index} 
           className="text-muted-foreground leading-relaxed my-4"
-          dangerouslySetInnerHTML={{ __html: formattedLine }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(formattedLine) }}
         />
       );
     });
