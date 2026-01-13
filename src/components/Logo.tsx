@@ -65,27 +65,20 @@ const Logo = ({ variant = 'full', className }: LogoProps) => {
             filter="url(#glow)"
           />
 
-          {/* Central mystical eye */}
-          <ellipse
-            cx="40"
-            cy="40"
-            rx="12"
-            ry="7"
-            stroke="url(#goldGradient)"
-            strokeWidth="1.5"
-            fill="none"
-            filter="url(#glow)"
-          />
-          
-          {/* Eye pupil with glow */}
-          <circle
-            cx="40"
-            cy="40"
-            r="4"
+          {/* Central number 9 - the master number */}
+          <text
+            x="40"
+            y="46"
+            textAnchor="middle"
             fill="url(#goldGradient)"
+            fontSize="24"
+            fontWeight="bold"
+            fontFamily="serif"
             filter="url(#glow)"
             className="animate-[pulse_3s_ease-in-out_infinite]"
-          />
+          >
+            9
+          </text>
 
           {/* 9 sacred dots representing numerology numbers */}
           {[...Array(9)].map((_, i) => {
