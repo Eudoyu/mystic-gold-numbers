@@ -65,40 +65,23 @@ const Logo = ({ variant = 'full', className }: LogoProps) => {
             filter="url(#glow)"
           />
 
-          {/* Sacred triangle pointing up */}
-          <path
-            d="M40 15 L60 55 L20 55 Z"
+          {/* Central mystical eye */}
+          <ellipse
+            cx="40"
+            cy="40"
+            rx="12"
+            ry="7"
             stroke="url(#goldGradient)"
             strokeWidth="1.5"
             fill="none"
             filter="url(#glow)"
-          />
-
-          {/* Inverted triangle */}
-          <path
-            d="M40 65 L55 30 L25 30 Z"
-            stroke="url(#goldGradient)"
-            strokeWidth="1"
-            strokeOpacity="0.5"
-            fill="none"
-          />
-
-          {/* Central eye symbol */}
-          <ellipse
-            cx="40"
-            cy="40"
-            rx="10"
-            ry="6"
-            stroke="url(#goldGradient)"
-            strokeWidth="1.5"
-            fill="none"
           />
           
           {/* Eye pupil with glow */}
           <circle
             cx="40"
             cy="40"
-            r="3"
+            r="4"
             fill="url(#goldGradient)"
             filter="url(#glow)"
             className="animate-[pulse_3s_ease-in-out_infinite]"
