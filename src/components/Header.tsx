@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Globe, Sparkles, User, LogOut, History } from 'lucide-react';
+import { Menu, X, Globe, User, LogOut, History } from 'lucide-react';
+import Logo from '@/components/Logo';
 import { Button } from '@/components/ui/button';
 import AdPlacement from '@/components/AdPlacement';
 import { useLanguage, languages, type Language } from '@/i18n';
@@ -51,13 +52,8 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to={getLocalePath('/')} className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <Sparkles className="w-5 h-5 text-primary" />
-            </div>
-            <span className="font-display text-2xl font-bold gold-text hidden sm:block tracking-wide">
-              NUMEROLOGY
-            </span>
+          <Link to={getLocalePath('/')}>
+            <Logo variant="full" />
           </Link>
 
           {/* Desktop Navigation */}
