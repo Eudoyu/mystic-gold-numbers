@@ -18,7 +18,7 @@ const Index = () => {
       <Helmet>
         <title>{t('meta.title')}</title>
         <meta name="description" content={t('meta.description')} />
-        <link rel="canonical" href={`https://numerologyhub.com/${language}`} />
+        <link rel="canonical" href={`https://numerologyforbiz.com/${language}`} />
         
         <meta property="og:title" content={t('meta.title')} />
         <meta property="og:description" content={t('meta.description')} />
@@ -28,9 +28,9 @@ const Index = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Business Numerology Calculator",
+            "name": "NumerologyForBiz - Business Numerology Calculator",
             "description": t('meta.description'),
-            "url": `https://numerologyhub.com/${language}`,
+            "url": `https://numerologyforbiz.com/${language}`,
             "applicationCategory": "BusinessApplication",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
           })}

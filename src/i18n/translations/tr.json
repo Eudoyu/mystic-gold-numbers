@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - İş Numerolojisi Hesaplayıcı",
+    "description": "Profesyonel iş numerolojisi hesaplayıcı. Şirket adlarını, pazarlama sloganlarını ve ortak uyumluluğunu analiz edin."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "businessName": "Şirket Adı",
+    "sloganAnalyzer": "Slogan Analizci",
+    "compatibility": "Uyumluluk",
+    "partnerCheck": "Ortak Kontrolü",
+    "nameComparison": "İsim Karşılaştırma",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Şirket adınızdaki gizli gücü keşfedin",
+    "subtitle": "İşinizin enerji titreşimini analiz etmek için antik numeroloji sistemlerini kullanın"
+  },
+  "calculator": {
+    "enterName": "Şirket adını girin",
+    "placeholder": "Şirketinizin adı",
+    "analyze": "Analiz Et",
+    "calculating": "Hesaplanıyor..."
+  },
+  "systems": {
+    "pythagorean": "Pisagor",
+    "chaldean": "Keldani",
+    "gematria": "Gematria",
+    "pythagoreanDesc": "Pisagor'un öğretilerine dayanan klasik Batı sistemi",
+    "chaldeanDesc": "Ses titreşimlerine odaklanan antik Babil sistemi",
+    "gematriaDesc": "Sayısal değerleri yorumlamak için İbrani mistik sistemi"
+  },
+  "results": {
+    "yourNumber": "Numaranız",
+    "meaning": "Anlam",
+    "recommendation": "Öneri"
+  },
+  "faq": {
+    "title": "Sıkça Sorulan Sorular",
+    "q1": "İş numerolojisi nedir?",
+    "a1": "İş numerolojisi, numeroloji ilkelerinin şirket adlarına uygulanmasıdır."
+  },
+  "footer": {
+    "tagline": "İşinizin numerolojik potansiyelini açığa çıkarın",
+    "calculators": "Hesaplayıcılar",
+    "resources": "Kaynaklar",
+    "legal": "Yasal",
+    "copyright": "Tüm hakları saklıdır.",
+    "madeWith": "Sevgiyle yapıldı"
+  },
+  "legal": {
+    "privacy": "Gizlilik",
+    "terms": "Şartlar",
+    "cookies": "Çerezler",
+    "disclaimer": "Sorumluluk Reddi"
+  },
+  "newsletter": {
+    "title": "Bültene abone ol",
+    "placeholder": "E-postanız",
+    "subscribe": "Abone Ol"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet"
+  }
+}

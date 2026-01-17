@@ -120,16 +120,16 @@ const Logo = ({ variant = 'full', className }: LogoProps) => {
         <div className="flex flex-col">
           <span 
             className={cn(
-              'font-display font-bold tracking-[0.2em] bg-gradient-to-r from-primary via-gold-400 to-primary bg-clip-text text-transparent',
-              'transition-all duration-300 group-hover:tracking-[0.25em]',
-              variant === 'compact' ? 'text-lg' : 'text-xl sm:text-2xl'
+              'font-display font-bold tracking-[0.1em] bg-gradient-to-r from-primary via-gold-400 to-primary bg-clip-text text-transparent',
+              'transition-all duration-300 group-hover:tracking-[0.15em]',
+              variant === 'compact' ? 'text-base' : 'text-lg sm:text-xl'
             )}
           >
-            NUMEROLOGY
+            NumerologyForBiz
           </span>
           {variant === 'full' && (
-            <span className="text-[10px] sm:text-xs text-muted-foreground tracking-[0.3em] uppercase font-light">
-              Sacred Numbers
+            <span className="text-[10px] sm:text-xs text-muted-foreground tracking-[0.2em] uppercase font-light">
+              Business Numerology
             </span>
           )}
         </div>

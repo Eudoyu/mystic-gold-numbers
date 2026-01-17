@@ -21,6 +21,7 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import { Privacy, Terms, Cookies, Disclaimer } from "./pages/legal";
 import { Pythagorean, Chaldean, Gematria } from "./pages/methods";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ const App = () => (
                     <Route path="/en/legal/terms" element={<Terms />} />
                     <Route path="/en/legal/disclaimer" element={<Disclaimer />} />
                     <Route path="/en/legal/cookies" element={<Cookies />} />
+                    <Route path="/en/admin" element={<Admin />} />
                     
                     {/* French routes */}
                     <Route path="/fr" element={<Index />} />

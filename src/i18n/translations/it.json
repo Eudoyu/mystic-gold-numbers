@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - Calcolatrice Numerologia Aziendale",
+    "description": "Calcolatrice professionale di numerologia aziendale. Analizza nomi aziendali, slogan e compatibilità dei partner."
+  },
+  "nav": {
+    "home": "Home",
+    "businessName": "Nome Aziendale",
+    "sloganAnalyzer": "Analizzatore Slogan",
+    "compatibility": "Compatibilità",
+    "partnerCheck": "Verifica Partner",
+    "nameComparison": "Confronto Nomi",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Scopri il potere nascosto nel nome della tua azienda",
+    "subtitle": "Usa antichi sistemi numerologici per analizzare la vibrazione energetica del tuo business"
+  },
+  "calculator": {
+    "enterName": "Inserisci il nome aziendale",
+    "placeholder": "Il nome della tua azienda",
+    "analyze": "Analizza",
+    "calculating": "Calcolo in corso..."
+  },
+  "systems": {
+    "pythagorean": "Pitagorico",
+    "chaldean": "Caldeo",
+    "gematria": "Gematria",
+    "pythagoreanDesc": "Sistema occidentale classico basato sugli insegnamenti di Pitagora",
+    "chaldeanDesc": "Antico sistema babilonese focalizzato sulle vibrazioni sonore",
+    "gematriaDesc": "Sistema mistico ebraico per interpretare i valori numerici"
+  },
+  "results": {
+    "yourNumber": "Il Tuo Numero",
+    "meaning": "Significato",
+    "recommendation": "Raccomandazione"
+  },
+  "faq": {
+    "title": "Domande Frequenti",
+    "q1": "Cos'è la numerologia aziendale?",
+    "a1": "La numerologia aziendale è l'applicazione dei principi numerologici ai nomi delle aziende."
+  },
+  "footer": {
+    "tagline": "Sblocca il potenziale numerologico del tuo business",
+    "calculators": "Calcolatrici",
+    "resources": "Risorse",
+    "legal": "Legale",
+    "copyright": "Tutti i diritti riservati.",
+    "madeWith": "Fatto con"
+  },
+  "legal": {
+    "privacy": "Privacy",
+    "terms": "Termini",
+    "cookies": "Cookie",
+    "disclaimer": "Disclaimer"
+  },
+  "newsletter": {
+    "title": "Iscriviti alla newsletter",
+    "placeholder": "La tua email",
+    "subscribe": "Iscriviti"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "submit": "Invia",
+    "cancel": "Annulla",
+    "save": "Salva"
+  }
+}

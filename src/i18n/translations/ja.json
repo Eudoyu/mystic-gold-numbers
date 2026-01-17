@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - ビジネス数秘術計算機",
+    "description": "プロフェッショナルなビジネス数秘術計算機。会社名、マーケティングスローガン、パートナー相性を分析。"
+  },
+  "nav": {
+    "home": "ホーム",
+    "businessName": "会社名",
+    "sloganAnalyzer": "スローガン分析",
+    "compatibility": "相性",
+    "partnerCheck": "パートナーチェック",
+    "nameComparison": "名前比較",
+    "blog": "ブログ"
+  },
+  "hero": {
+    "title": "あなたの会社名に隠された力を発見",
+    "subtitle": "古代の数秘術システムを使って、ビジネスのエネルギー振動を分析"
+  },
+  "calculator": {
+    "enterName": "会社名を入力",
+    "placeholder": "あなたの会社名",
+    "analyze": "分析する",
+    "calculating": "計算中..."
+  },
+  "systems": {
+    "pythagorean": "ピタゴラス式",
+    "chaldean": "カルデア式",
+    "gematria": "ゲマトリア",
+    "pythagoreanDesc": "ピタゴラスの教えに基づく西洋古典システム",
+    "chaldeanDesc": "音の振動に焦点を当てた古代バビロニアシステム",
+    "gematriaDesc": "数値を解釈するヘブライ神秘主義システム"
+  },
+  "results": {
+    "yourNumber": "あなたの数字",
+    "meaning": "意味",
+    "recommendation": "推奨"
+  },
+  "faq": {
+    "title": "よくある質問",
+    "q1": "ビジネス数秘術とは？",
+    "a1": "ビジネス数秘術は、数秘術の原理を会社名に適用したものです。"
+  },
+  "footer": {
+    "tagline": "ビジネスの数秘術的可能性を解き放つ",
+    "calculators": "計算機",
+    "resources": "リソース",
+    "legal": "法的情報",
+    "copyright": "全著作権所有。",
+    "madeWith": "愛を込めて"
+  },
+  "legal": {
+    "privacy": "プライバシー",
+    "terms": "利用規約",
+    "cookies": "クッキー",
+    "disclaimer": "免責事項"
+  },
+  "newsletter": {
+    "title": "ニュースレターに登録",
+    "placeholder": "メールアドレス",
+    "subscribe": "登録"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "submit": "送信",
+    "cancel": "キャンセル",
+    "save": "保存"
+  }
+}

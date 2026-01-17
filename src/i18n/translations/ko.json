@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - 비즈니스 수비학 계산기",
+    "description": "전문 비즈니스 수비학 계산기. 회사 이름, 마케팅 슬로건, 파트너 호환성을 분석합니다."
+  },
+  "nav": {
+    "home": "홈",
+    "businessName": "회사명",
+    "sloganAnalyzer": "슬로건 분석기",
+    "compatibility": "호환성",
+    "partnerCheck": "파트너 확인",
+    "nameComparison": "이름 비교",
+    "blog": "블로그"
+  },
+  "hero": {
+    "title": "회사 이름에 숨겨진 힘을 발견하세요",
+    "subtitle": "고대 수비학 시스템을 사용하여 비즈니스의 에너지 진동을 분석하세요"
+  },
+  "calculator": {
+    "enterName": "회사 이름 입력",
+    "placeholder": "회사 이름",
+    "analyze": "분석",
+    "calculating": "계산 중..."
+  },
+  "systems": {
+    "pythagorean": "피타고라스",
+    "chaldean": "칼데아",
+    "gematria": "게마트리아",
+    "pythagoreanDesc": "피타고라스의 가르침에 기반한 고전 서양 시스템",
+    "chaldeanDesc": "소리 진동에 초점을 맞춘 고대 바빌로니아 시스템",
+    "gematriaDesc": "숫자 값을 해석하는 히브리 신비주의 시스템"
+  },
+  "results": {
+    "yourNumber": "당신의 숫자",
+    "meaning": "의미",
+    "recommendation": "권장 사항"
+  },
+  "faq": {
+    "title": "자주 묻는 질문",
+    "q1": "비즈니스 수비학이란 무엇인가요?",
+    "a1": "비즈니스 수비학은 회사 이름에 수비학 원리를 적용하는 것입니다."
+  },
+  "footer": {
+    "tagline": "비즈니스의 수비학적 잠재력을 잠금 해제하세요",
+    "calculators": "계산기",
+    "resources": "리소스",
+    "legal": "법적 정보",
+    "copyright": "모든 권리 보유.",
+    "madeWith": "사랑으로 제작"
+  },
+  "legal": {
+    "privacy": "개인정보",
+    "terms": "이용약관",
+    "cookies": "쿠키",
+    "disclaimer": "면책조항"
+  },
+  "newsletter": {
+    "title": "뉴스레터 구독",
+    "placeholder": "이메일",
+    "subscribe": "구독"
+  },
+  "common": {
+    "loading": "로딩 중...",
+    "error": "오류",
+    "submit": "제출",
+    "cancel": "취소",
+    "save": "저장"
+  }
+}

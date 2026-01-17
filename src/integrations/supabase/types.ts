@@ -63,6 +63,11 @@ export type Database = {
           display_name: string | null
           id: string
           newsletter_subscribed: boolean | null
+          plan_type: Database["public"]["Enums"]["plan_type"] | null
+          polar_customer_id: string | null
+          polar_subscription_id: string | null
+          preferred_language: string | null
+          sprint_expires_at: string | null
           updated_at: string
         }
         Insert: {
@@ -71,6 +76,11 @@ export type Database = {
           display_name?: string | null
           id: string
           newsletter_subscribed?: boolean | null
+          plan_type?: Database["public"]["Enums"]["plan_type"] | null
+          polar_customer_id?: string | null
+          polar_subscription_id?: string | null
+          preferred_language?: string | null
+          sprint_expires_at?: string | null
           updated_at?: string
         }
         Update: {
@@ -79,6 +89,77 @@ export type Database = {
           display_name?: string | null
           id?: string
           newsletter_subscribed?: boolean | null
+          plan_type?: Database["public"]["Enums"]["plan_type"] | null
+          polar_customer_id?: string | null
+          polar_subscription_id?: string | null
+          preferred_language?: string | null
+          sprint_expires_at?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      seo_notes: {
+        Row: {
+          action_items: string | null
+          competitor_gaps: string | null
+          content_pillars: string | null
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          action_items?: string | null
+          competitor_gaps?: string | null
+          content_pillars?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          action_items?: string | null
+          competitor_gaps?: string | null
+          content_pillars?: string | null
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          announcement_text: string | null
+          created_at: string
+          id: string
+          maintenance_mode: boolean | null
+          polar_product_pro_id: string | null
+          polar_product_sprint_id: string | null
+          pro_price: number | null
+          sprint_price: number | null
+          updated_at: string
+        }
+        Insert: {
+          announcement_text?: string | null
+          created_at?: string
+          id?: string
+          maintenance_mode?: boolean | null
+          polar_product_pro_id?: string | null
+          polar_product_sprint_id?: string | null
+          pro_price?: number | null
+          sprint_price?: number | null
+          updated_at?: string
+        }
+        Update: {
+          announcement_text?: string | null
+          created_at?: string
+          id?: string
+          maintenance_mode?: boolean | null
+          polar_product_pro_id?: string | null
+          polar_product_sprint_id?: string | null
+          pro_price?: number | null
+          sprint_price?: number | null
           updated_at?: string
         }
         Relationships: []
@@ -116,15 +197,43 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
+      plan_type: "free" | "sprint" | "pro"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -251,6 +360,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+      plan_type: ["free", "sprint", "pro"],
+    },
   },
 } as const

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - Zakelijke Numerologie Calculator",
+    "description": "Professionele zakelijke numerologie calculator. Analyseer bedrijfsnamen, marketing slogans en partner compatibiliteit."
+  },
+  "nav": {
+    "home": "Home",
+    "businessName": "Bedrijfsnaam",
+    "sloganAnalyzer": "Slogan Analyzer",
+    "compatibility": "Compatibiliteit",
+    "partnerCheck": "Partner Check",
+    "nameComparison": "Naam Vergelijking",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Ontdek de verborgen kracht in uw bedrijfsnaam",
+    "subtitle": "Gebruik oude numerologie systemen om de energetische vibratie van uw bedrijf te analyseren"
+  },
+  "calculator": {
+    "enterName": "Voer bedrijfsnaam in",
+    "placeholder": "Uw bedrijfsnaam",
+    "analyze": "Analyseren",
+    "calculating": "Berekenen..."
+  },
+  "systems": {
+    "pythagorean": "Pythagoreaans",
+    "chaldean": "Chaldeeuws",
+    "gematria": "Gematria",
+    "pythagoreanDesc": "Klassiek westers systeem gebaseerd op de leer van Pythagoras",
+    "chaldeanDesc": "Oud Babylonisch systeem gericht op klankvibraties",
+    "gematriaDesc": "Hebreeuws mystiek systeem voor interpretatie van numerieke waarden"
+  },
+  "results": {
+    "yourNumber": "Uw Nummer",
+    "meaning": "Betekenis",
+    "recommendation": "Aanbeveling"
+  },
+  "faq": {
+    "title": "Veelgestelde Vragen",
+    "q1": "Wat is zakelijke numerologie?",
+    "a1": "Zakelijke numerologie is de toepassing van numerologische principes op bedrijfsnamen."
+  },
+  "footer": {
+    "tagline": "Ontgrendel het numerologische potentieel van uw bedrijf",
+    "calculators": "Calculators",
+    "resources": "Bronnen",
+    "legal": "Juridisch",
+    "copyright": "Alle rechten voorbehouden.",
+    "madeWith": "Gemaakt met"
+  },
+  "legal": {
+    "privacy": "Privacy",
+    "terms": "Voorwaarden",
+    "cookies": "Cookies",
+    "disclaimer": "Disclaimer"
+  },
+  "newsletter": {
+    "title": "Abonneer op nieuwsbrief",
+    "placeholder": "Uw email",
+    "subscribe": "Abonneren"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Fout",
+    "submit": "Verzenden",
+    "cancel": "Annuleren",
+    "save": "Opslaan"
+  }
+}

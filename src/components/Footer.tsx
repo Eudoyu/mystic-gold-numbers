@@ -39,7 +39,7 @@ const Footer = () => {
                 <Sparkles className="w-5 h-5 text-primary" />
               </div>
               <span className="font-display text-xl font-semibold gold-text">
-                Numerology Hub
+                NumerologyForBiz
               </span>
             </Link>
             <p className="text-sm text-muted-foreground mb-6">
@@ -47,7 +47,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
               <Mail className="w-4 h-4" />
-              <span>contact@numerologyhub.com</span>
+              <span>contact@numerologyforbiz.com</span>
             </div>
             
             {/* Language Switcher */}
@@ -132,7 +132,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Numerology Hub. {t('footer.copyright')}
+              © {currentYear} NumerologyForBiz.com. {t('footer.copyright')}
             </p>
             <p className="text-sm text-muted-foreground flex items-center gap-1">
               {t('footer.madeWith')} <Heart className="w-3 h-3 text-destructive" />
