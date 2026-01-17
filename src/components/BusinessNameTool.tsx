@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Building2, Sparkles, ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Building2, Sparkles, ArrowRight, Loader2, CheckCircle, AlertCircle, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AdPlacement from '@/components/AdPlacement';
+import TieredAccessWrapper from '@/components/TieredAccessWrapper';
+import { useUserPlan } from '@/hooks/useUserPlan';
 
 type CalculationSystem = 'pythagorean' | 'chaldean' | 'gematria';
 
@@ -75,9 +77,10 @@ interface BusinessResult {
 
 const BusinessNameTool = () => {
   const [businessName, setBusinessName] = useState('');
-  const [system, setSystem] = useState<CalculationSystem>('chaldean');
+  const [system, setSystem] = useState<CalculationSystem>('pythagorean');
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<BusinessResult | null>(null);
+  const { canAccessChaldean, canAccessGematria, dailyCalculationsRemaining, planType } = useUserPlan();
 
   const handleAnalyze = () => {
     if (businessName.trim()) {
@@ -95,6 +98,21 @@ const BusinessNameTool = () => {
     if ([1, 5, 6, 8, 9].includes(num)) return 'excellent';
     if ([2, 3, 11, 22, 33].includes(num)) return 'good';
     return 'neutral';
+  };
+
+  const canUseSystem = (sys: CalculationSystem) => {
+    if (sys === 'pythagorean') return true;
+    if (sys === 'chaldean') return canAccessChaldean;
+    if (sys === 'gematria') return canAccessGematria;
+    return false;
+  };
+
+  const handleSystemChange = (newSystem: string) => {
+    const sys = newSystem as CalculationSystem;
+    if (canUseSystem(sys)) {
+      setSystem(sys);
+      setResult(null);
+    }
   };
 
   return (
@@ -117,19 +135,35 @@ const BusinessNameTool = () => {
 
         {/* System Selection Tabs */}
         <div className="max-w-2xl mx-auto mb-6">
-          <Tabs value={system} onValueChange={(v) => setSystem(v as CalculationSystem)} className="w-full">
+          <Tabs value={system} onValueChange={handleSystemChange} className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-muted/50">
               <TabsTrigger value="pythagorean" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 Pythagorean
               </TabsTrigger>
-              <TabsTrigger value="chaldean" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger 
+                value="chaldean" 
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground relative"
+                disabled={!canAccessChaldean}
+              >
                 Chaldean
+                {!canAccessChaldean && <Lock className="w-3 h-3 ml-1 opacity-60" />}
               </TabsTrigger>
-              <TabsTrigger value="gematria" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger 
+                value="gematria" 
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground relative"
+                disabled={!canAccessGematria}
+              >
                 Gematria
+                {!canAccessGematria && <Lock className="w-3 h-3 ml-1 opacity-60" />}
               </TabsTrigger>
             </TabsList>
           </Tabs>
+          
+          {planType === 'free' && dailyCalculationsRemaining <= 0 && (
+            <p className="text-center text-sm text-amber-500 mt-2">
+              Daily limit reached. Upgrade for unlimited calculations.
+            </p>
+          )}
         </div>
 
         <div className="max-w-2xl mx-auto">

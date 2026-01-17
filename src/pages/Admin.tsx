@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
-import { Settings, Shield, Save, AlertTriangle, Info } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Settings, Shield, Save, AlertTriangle, Info, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -122,6 +122,14 @@ const Admin = () => {
                 <h1 className="text-2xl font-display font-bold">Admin Control Center</h1>
                 <p className="text-muted-foreground">Manage site settings and configuration</p>
               </div>
+              
+              {/* Quick Links */}
+              <Link to="/en/admin/seo-analytics">
+                <Button variant="outline" className="gap-2">
+                  <TrendingUp className="w-4 h-4" />
+                  SEO Analytics
+                </Button>
+              </Link>
             </div>
 
             {/* Setup Instructions */}
