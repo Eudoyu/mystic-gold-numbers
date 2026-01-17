@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { MessageSquare, Sparkles, ArrowRight, Loader2, RotateCcw, Zap } from 'lucide-react';
+import { MessageSquare, Sparkles, ArrowRight, Loader2, RotateCcw, Zap, Lock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ExpertInsight from '@/components/ExpertInsight';
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useUserPlan } from '@/hooks/useUserPlan';
 
 // Numerology calculation maps
 const PYTHAGOREAN_MAP: Record<string, number> = {
@@ -144,11 +145,12 @@ interface SloganResult {
 }
 
 const SloganAnalyzer = () => {
-  const [system, setSystem] = useState<CalculationSystem>('chaldean');
+  const [system, setSystem] = useState<CalculationSystem>('pythagorean');
   const [slogan, setSlogan] = useState('');
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<SloganResult | null>(null);
   const [savedSlogans, setSavedSlogans] = useState<SloganResult[]>([]);
+  const { canAccessChaldean, canAccessGematria } = useUserPlan();
 
   const handleAnalyze = () => {
     if (!slogan.trim()) return;
@@ -220,8 +222,14 @@ const SloganAnalyzer = () => {
               <Tabs value={system} onValueChange={(v) => { setSystem(v as CalculationSystem); setResult(null); }} className="mb-6">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="pythagorean">Pythagorean</TabsTrigger>
-                  <TabsTrigger value="chaldean">Chaldean</TabsTrigger>
-                  <TabsTrigger value="gematria">Gematria</TabsTrigger>
+                  <TabsTrigger value="chaldean" disabled={!canAccessChaldean}>
+                    Chaldean
+                    {!canAccessChaldean && <Lock className="w-3 h-3 ml-1 opacity-60" />}
+                  </TabsTrigger>
+                  <TabsTrigger value="gematria" disabled={!canAccessGematria}>
+                    Gematria
+                    {!canAccessGematria && <Lock className="w-3 h-3 ml-1 opacity-60" />}
+                  </TabsTrigger>
                 </TabsList>
               </Tabs>
 
