@@ -65,5 +65,50 @@
     "submit": "Verzenden",
     "cancel": "Annuleren",
     "save": "Opslaan"
+  },
+  "auth": {
+    "signIn": "Inloggen",
+    "signUp": "Registreren",
+    "signOut": "Uitloggen",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "displayName": "Weergavenaam (optioneel)",
+    "signingIn": "Bezig met inloggen...",
+    "creatingAccount": "Account aanmaken...",
+    "createFreeAccount": "Gratis account maken",
+    "orContinueWith": "Of doorgaan met",
+    "continueWithGoogle": "Doorgaan met Google",
+    "backToHome": "Terug naar home",
+    "unlockPremium": "Premium Functies Ontgrendelen",
+    "signInFailed": "Inloggen mislukt",
+    "signUpFailed": "Registratie mislukt",
+    "googleSignInFailed": "Google inloggen mislukt",
+    "invalidCredentials": "Ongeldige e-mail of wachtwoord.",
+    "validationError": "Validatiefout"
+  },
+  "pricing": {
+    "title": "Premium Functies Ontgrendelen",
+    "sprint": "Sprint 72U",
+    "sprintDesc": "Eenmalige aankoop",
+    "pro": "Pro",
+    "proDesc": "Maandelijks abonnement",
+    "perHours": "/ 72 uur",
+    "perMonth": "/ maand",
+    "mostPopular": "Meest populair",
+    "getSprintAccess": "Sprint toegang krijgen",
+    "subscribeToPro": "Pro abonneren",
+    "chaldeanNumerology": "Chaldeeuwse Numerologie",
+    "hebrewGematria": "Hebreeuwse Gematria",
+    "unlimitedCalculations": "Onbeperkte berekeningen",
+    "matrixOfConvergence": "Convergentie Matrix",
+    "allSprintFeatures": "Alle Sprint functies",
+    "partnerCompatibility": "Partner Compatibiliteit",
+    "aiGeneratedReports": "AI-gegenereerde rapporten"
+  },
+  "locked": {
+    "unlockNow": "Nu ontgrendelen",
+    "unlockWith": "Ontgrendel deze functie met {plan} voor geavanceerde numerologie systemen.",
+    "sprintPlan": "Sprint 72U ($19)",
+    "proPlan": "Pro ($14.90/maand)"
   }
 }

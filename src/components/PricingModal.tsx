@@ -22,12 +22,11 @@ interface PricingModalProps {
 const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
   const { settings } = useSiteSettings();
   const { user } = useAuth();
-  const { getLocalePath, language } = useLanguage();
+  const { t, getLocalePath, language } = useLanguage();
   const [loading, setLoading] = useState<'sprint' | 'pro' | null>(null);
 
   const handleCheckout = async (plan: 'sprint' | 'pro') => {
     if (!user) {
-      // Redirect to auth
       window.location.href = getLocalePath('/auth');
       return;
     }
@@ -44,19 +43,18 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
 
       if (error) {
         console.error('Checkout error:', error);
-        toast.error('Failed to start checkout. Please try again.');
+        toast.error(t('pricing.checkoutFailed') || 'Failed to start checkout. Please try again.');
         return;
       }
 
       if (data?.checkoutUrl) {
-        // Redirect to Polar checkout
         window.location.href = data.checkoutUrl;
       } else {
-        toast.error('Checkout not available. Please contact support.');
+        toast.error(t('pricing.checkoutNotAvailable') || 'Checkout not available. Please contact support.');
       }
     } catch (err) {
       console.error('Checkout error:', err);
-      toast.error('An error occurred. Please try again.');
+      toast.error(t('pricing.checkoutError') || 'An error occurred. Please try again.');
     } finally {
       setLoading(null);
     }
@@ -70,7 +68,7 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
       <DialogContent className="sm:max-w-[700px] bg-card border-border">
         <DialogHeader>
           <DialogTitle className="text-2xl font-display text-center">
-            Unlock Premium Features
+            {t('pricing.title') || 'Unlock Premium Features'}
           </DialogTitle>
         </DialogHeader>
 
@@ -86,32 +84,32 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
                 <Zap className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold">Sprint 72H</h3>
-                <p className="text-sm text-muted-foreground">One-time purchase</p>
+                <h3 className="font-semibold">{t('pricing.sprint') || 'Sprint 72H'}</h3>
+                <p className="text-sm text-muted-foreground">{t('pricing.sprintDesc') || 'One-time purchase'}</p>
               </div>
             </div>
             
             <div className="mb-6">
               <span className="text-3xl font-bold">${sprintPrice}</span>
-              <span className="text-muted-foreground"> / 72 hours</span>
+              <span className="text-muted-foreground"> {t('pricing.perHours') || '/ 72 hours'}</span>
             </div>
 
             <ul className="space-y-3 mb-6">
               <li className="flex items-center gap-2 text-sm">
                 <Check className="w-4 h-4 text-primary" />
-                Chaldean Numerology
+                {t('pricing.chaldeanNumerology') || 'Chaldean Numerology'}
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Check className="w-4 h-4 text-primary" />
-                Hebrew Gematria
+                {t('pricing.hebrewGematria') || 'Hebrew Gematria'}
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Check className="w-4 h-4 text-primary" />
-                Unlimited calculations
+                {t('pricing.unlimitedCalculations') || 'Unlimited calculations'}
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <X className="w-4 h-4" />
-                Matrix of Convergence
+                {t('pricing.matrixOfConvergence') || 'Matrix of Convergence'}
               </li>
             </ul>
 
@@ -121,7 +119,7 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
               onClick={() => handleCheckout('sprint')}
               disabled={loading !== null}
             >
-              {loading === 'sprint' ? 'Loading...' : 'Get Sprint Access'}
+              {loading === 'sprint' ? (t('common.loading') || 'Loading...') : (t('pricing.getSprintAccess') || 'Get Sprint Access')}
             </Button>
           </div>
 
@@ -133,7 +131,7 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
           }`}>
             {highlightPlan !== 'sprint' && (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
-                Most Popular
+                {t('pricing.mostPopular') || 'Most Popular'}
               </div>
             )}
             
@@ -142,32 +140,32 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
                 <Crown className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold">Pro</h3>
-                <p className="text-sm text-muted-foreground">Monthly subscription</p>
+                <h3 className="font-semibold">{t('pricing.pro') || 'Pro'}</h3>
+                <p className="text-sm text-muted-foreground">{t('pricing.proDesc') || 'Monthly subscription'}</p>
               </div>
             </div>
             
             <div className="mb-6">
               <span className="text-3xl font-bold">${proPrice}</span>
-              <span className="text-muted-foreground"> / month</span>
+              <span className="text-muted-foreground"> {t('pricing.perMonth') || '/ month'}</span>
             </div>
 
             <ul className="space-y-3 mb-6">
               <li className="flex items-center gap-2 text-sm">
                 <Check className="w-4 h-4 text-primary" />
-                All Sprint features
+                {t('pricing.allSprintFeatures') || 'All Sprint features'}
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Check className="w-4 h-4 text-primary" />
-                Matrix of Convergence
+                {t('pricing.matrixOfConvergence') || 'Matrix of Convergence'}
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Check className="w-4 h-4 text-primary" />
-                Partner Compatibility
+                {t('pricing.partnerCompatibility') || 'Partner Compatibility'}
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <Check className="w-4 h-4 text-primary" />
-                AI-Generated Reports
+                {t('pricing.aiGeneratedReports') || 'AI-Generated Reports'}
               </li>
             </ul>
 
@@ -176,7 +174,7 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
               onClick={() => handleCheckout('pro')}
               disabled={loading !== null}
             >
-              {loading === 'pro' ? 'Loading...' : 'Subscribe to Pro'}
+              {loading === 'pro' ? (t('common.loading') || 'Loading...') : (t('pricing.subscribeToPro') || 'Subscribe to Pro')}
             </Button>
           </div>
         </div>

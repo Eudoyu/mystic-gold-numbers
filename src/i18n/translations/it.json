@@ -65,5 +65,50 @@
     "submit": "Invia",
     "cancel": "Annulla",
     "save": "Salva"
+  },
+  "auth": {
+    "signIn": "Accedi",
+    "signUp": "Registrati",
+    "signOut": "Esci",
+    "email": "Email",
+    "password": "Password",
+    "displayName": "Nome visualizzato (opzionale)",
+    "signingIn": "Accesso in corso...",
+    "creatingAccount": "Creazione account...",
+    "createFreeAccount": "Crea account gratuito",
+    "orContinueWith": "Oppure continua con",
+    "continueWithGoogle": "Continua con Google",
+    "backToHome": "Torna alla home",
+    "unlockPremium": "Sblocca Funzionalità Premium",
+    "signInFailed": "Accesso fallito",
+    "signUpFailed": "Registrazione fallita",
+    "googleSignInFailed": "Accesso Google fallito",
+    "invalidCredentials": "Email o password non validi.",
+    "validationError": "Errore di validazione"
+  },
+  "pricing": {
+    "title": "Sblocca Funzionalità Premium",
+    "sprint": "Sprint 72H",
+    "sprintDesc": "Acquisto singolo",
+    "pro": "Pro",
+    "proDesc": "Abbonamento mensile",
+    "perHours": "/ 72 ore",
+    "perMonth": "/ mese",
+    "mostPopular": "Più popolare",
+    "getSprintAccess": "Ottieni accesso Sprint",
+    "subscribeToPro": "Abbonati a Pro",
+    "chaldeanNumerology": "Numerologia Caldea",
+    "hebrewGematria": "Gematria Ebraica",
+    "unlimitedCalculations": "Calcoli illimitati",
+    "matrixOfConvergence": "Matrice di Convergenza",
+    "allSprintFeatures": "Tutte le funzionalità Sprint",
+    "partnerCompatibility": "Compatibilità Partner",
+    "aiGeneratedReports": "Report generati dall'IA"
+  },
+  "locked": {
+    "unlockNow": "Sblocca ora",
+    "unlockWith": "Sblocca questa funzionalità con {plan} per accedere ai sistemi avanzati di numerologia.",
+    "sprintPlan": "Sprint 72H ($19)",
+    "proPlan": "Pro ($14.90/mese)"
   }
 }

@@ -13,9 +13,12 @@ const LockedFeature = ({ featureName, requiredPlan, onUnlock }: LockedFeaturePro
   const { t } = useLanguage();
   
   const planLabels = {
-    sprint: 'Sprint 72H ($19)',
-    pro: 'Pro ($14.90/mo)',
+    sprint: t('locked.sprintPlan') || 'Sprint 72H ($19)',
+    pro: t('locked.proPlan') || 'Pro ($14.90/mo)',
   };
+
+  const unlockText = (t('locked.unlockWith') || 'Unlock this feature with {plan} to access advanced numerology systems.')
+    .replace('{plan}', planLabels[requiredPlan]);
 
   return (
     <Card className="border-dashed border-2 border-primary/30 bg-card/50">
@@ -25,11 +28,11 @@ const LockedFeature = ({ featureName, requiredPlan, onUnlock }: LockedFeaturePro
         </div>
         <h3 className="text-lg font-semibold mb-2">{featureName}</h3>
         <p className="text-sm text-muted-foreground mb-4 max-w-xs">
-          Unlock this feature with {planLabels[requiredPlan]} to access advanced numerology systems.
+          {unlockText}
         </p>
         <Button onClick={onUnlock} className="gap-2">
           <Lock className="w-4 h-4" />
-          Unlock Now
+          {t('locked.unlockNow') || 'Unlock Now'}
         </Button>
       </CardContent>
     </Card>
