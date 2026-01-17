@@ -65,5 +65,50 @@
     "submit": "送信",
     "cancel": "キャンセル",
     "save": "保存"
+  },
+  "auth": {
+    "signIn": "ログイン",
+    "signUp": "新規登録",
+    "signOut": "ログアウト",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "displayName": "表示名（任意）",
+    "signingIn": "ログイン中...",
+    "creatingAccount": "アカウント作成中...",
+    "createFreeAccount": "無料アカウント作成",
+    "orContinueWith": "または以下で続行",
+    "continueWithGoogle": "Googleで続行",
+    "backToHome": "ホームに戻る",
+    "unlockPremium": "プレミアム機能をアンロック",
+    "signInFailed": "ログインに失敗しました",
+    "signUpFailed": "登録に失敗しました",
+    "googleSignInFailed": "Googleログインに失敗しました",
+    "invalidCredentials": "メールアドレスまたはパスワードが無効です。",
+    "validationError": "検証エラー"
+  },
+  "pricing": {
+    "title": "プレミアム機能をアンロック",
+    "sprint": "スプリント72時間",
+    "sprintDesc": "一回限りの購入",
+    "pro": "プロ",
+    "proDesc": "月額サブスクリプション",
+    "perHours": "/ 72時間",
+    "perMonth": "/ 月",
+    "mostPopular": "最も人気",
+    "getSprintAccess": "スプリントアクセスを取得",
+    "subscribeToPro": "プロに登録",
+    "chaldeanNumerology": "カルデア数秘術",
+    "hebrewGematria": "ヘブライ語ゲマトリア",
+    "unlimitedCalculations": "無制限の計算",
+    "matrixOfConvergence": "収束マトリックス",
+    "allSprintFeatures": "すべてのスプリント機能",
+    "partnerCompatibility": "パートナー相性",
+    "aiGeneratedReports": "AI生成レポート"
+  },
+  "locked": {
+    "unlockNow": "今すぐアンロック",
+    "unlockWith": "{plan}でこの機能をアンロックして、高度な数秘術システムにアクセス。",
+    "sprintPlan": "スプリント72時間 ($19)",
+    "proPlan": "プロ ($14.90/月)"
   }
 }
