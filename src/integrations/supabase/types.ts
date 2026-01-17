@@ -220,7 +220,30 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      site_settings_public: {
+        Row: {
+          announcement_text: string | null
+          id: string | null
+          maintenance_mode: boolean | null
+          pro_price: number | null
+          sprint_price: number | null
+        }
+        Insert: {
+          announcement_text?: string | null
+          id?: string | null
+          maintenance_mode?: boolean | null
+          pro_price?: number | null
+          sprint_price?: number | null
+        }
+        Update: {
+          announcement_text?: string | null
+          id?: string | null
+          maintenance_mode?: boolean | null
+          pro_price?: number | null
+          sprint_price?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {
