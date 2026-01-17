@@ -19,7 +19,7 @@ import Auth from "./pages/Auth";
 import History from "./pages/History";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
-import { Privacy, Terms, Cookies, Disclaimer } from "./pages/legal";
+import { Privacy, Terms, Cookies, Disclaimer, LegalNotice } from "./pages/legal";
 import { Pythagorean, Chaldean, Gematria } from "./pages/methods";
 import Admin from "./pages/Admin";
 import SeoAnalytics from "./pages/admin/SeoAnalytics";
@@ -65,6 +65,7 @@ const App = () => (
                     <Route path="/en/legal/terms" element={<Terms />} />
                     <Route path="/en/legal/disclaimer" element={<Disclaimer />} />
                     <Route path="/en/legal/cookies" element={<Cookies />} />
+                    <Route path="/en/legal/notice" element={<LegalNotice />} />
                     <Route path="/en/admin" element={<Admin />} />
                     <Route path="/en/admin/seo-analytics" element={<SeoAnalytics />} />
                     
@@ -86,6 +87,7 @@ const App = () => (
                     <Route path="/fr/legal/terms" element={<Terms />} />
                     <Route path="/fr/legal/cookies" element={<Cookies />} />
                     <Route path="/fr/legal/disclaimer" element={<Disclaimer />} />
+                    <Route path="/fr/legal/notice" element={<LegalNotice />} />
                     
                     {/* Spanish routes */}
                     <Route path="/es" element={<Index />} />
@@ -105,6 +107,7 @@ const App = () => (
                     <Route path="/es/legal/terms" element={<Terms />} />
                     <Route path="/es/legal/cookies" element={<Cookies />} />
                     <Route path="/es/legal/disclaimer" element={<Disclaimer />} />
+                    <Route path="/es/legal/notice" element={<LegalNotice />} />
                     
                     {/* German routes */}
                     <Route path="/de" element={<Index />} />
@@ -112,6 +115,7 @@ const App = () => (
                     <Route path="/de/tools/business-name" element={<BusinessNames />} />
                     <Route path="/de/tools/compatibility" element={<Compatibility />} />
                     <Route path="/de/tools/partner-check" element={<PartnerCheck />} />
+                    <Route path="/de/legal/notice" element={<LegalNotice />} />
                     <Route path="/de/admin" element={<Admin />} />
                     
                     {/* Portuguese routes */}

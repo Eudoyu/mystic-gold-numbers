@@ -56,11 +56,11 @@
     "madeWith": "Hecho con amor para los buscadores de la verdad"
   },
   "legal": {
+    "notice": "Aviso Legal",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
     "cookies": "Política de Cookies",
-    "disclaimer": "Aviso Legal",
-    "imprint": "Aviso Legal"
+    "disclaimer": "Descargo de Responsabilidad"
   },
   "newsletter": {
     "title": "Mantente Actualizado",

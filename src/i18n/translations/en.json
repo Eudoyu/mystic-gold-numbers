@@ -56,11 +56,11 @@
     "madeWith": "Made with love for seekers of truth"
   },
   "legal": {
+    "notice": "Legal Notice",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "cookies": "Cookie Policy",
-    "disclaimer": "Disclaimer",
-    "imprint": "Legal Notice"
+    "disclaimer": "Disclaimer"
   },
   "newsletter": {
     "title": "Stay Updated",
