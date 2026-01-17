@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Users, ArrowRight, Loader2, RotateCcw, Sparkles } from 'lucide-react';
+import { Users, ArrowRight, Loader2, RotateCcw, Sparkles, Lock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ExpertInsight from '@/components/ExpertInsight';
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useUserPlan } from '@/hooks/useUserPlan';
 
 // Numerology calculation maps
 const PYTHAGOREAN_MAP: Record<string, number> = {
@@ -132,6 +133,7 @@ const PartnerCheck = () => {
   const [person2Birthdate, setPerson2Birthdate] = useState('');
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<CompatibilityResult | null>(null);
+  const { canAccessChaldean, canAccessGematria } = useUserPlan();
 
   const handleCalculate = () => {
     setIsCalculating(true);
@@ -210,8 +212,14 @@ const PartnerCheck = () => {
               <Tabs value={system} onValueChange={(v) => setSystem(v as CalculationSystem)} className="mb-6">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="pythagorean">Pythagorean</TabsTrigger>
-                  <TabsTrigger value="chaldean">Chaldean</TabsTrigger>
-                  <TabsTrigger value="gematria">Gematria</TabsTrigger>
+                  <TabsTrigger value="chaldean" disabled={!canAccessChaldean}>
+                    Chaldean
+                    {!canAccessChaldean && <Lock className="w-3 h-3 ml-1 opacity-60" />}
+                  </TabsTrigger>
+                  <TabsTrigger value="gematria" disabled={!canAccessGematria}>
+                    Gematria
+                    {!canAccessGematria && <Lock className="w-3 h-3 ml-1 opacity-60" />}
+                  </TabsTrigger>
                 </TabsList>
               </Tabs>
 
