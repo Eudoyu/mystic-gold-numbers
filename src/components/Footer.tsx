@@ -20,6 +20,7 @@ const Footer = () => {
       { labelKey: 'systems.gematria', href: getLocalePath('/methods/gematria') },
     ],
     legal: [
+      { labelKey: 'legal.notice', href: getLocalePath('/legal/notice') },
       { labelKey: 'legal.privacy', href: getLocalePath('/legal/privacy') },
       { labelKey: 'legal.terms', href: getLocalePath('/legal/terms') },
       { labelKey: 'legal.cookies', href: getLocalePath('/legal/cookies') },

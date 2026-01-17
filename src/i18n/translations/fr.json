@@ -56,11 +56,11 @@
     "madeWith": "Fait avec amour pour les chercheurs de vérité"
   },
   "legal": {
+    "notice": "Mentions Légales",
     "privacy": "Politique de Confidentialité",
     "terms": "Conditions d'Utilisation",
     "cookies": "Politique des Cookies",
-    "disclaimer": "Avertissement",
-    "imprint": "Mentions Légales"
+    "disclaimer": "Avertissement"
   },
   "newsletter": {
     "title": "Restez Informé",
