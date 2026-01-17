@@ -3,10 +3,14 @@ import { useLanguage } from '@/i18n';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+const COMPANY_NAME = 'NumerologyForBiz.com';
+const COMPANY_EMAIL = 'contact@numerologyforbiz.com';
+const SITE_URL = 'https://numerologyforbiz.com';
+
 const legalContent = {
   en: {
     title: 'Cookie Policy',
-    lastUpdated: 'Last updated: December 2024',
+    lastUpdated: 'Last updated: January 2025',
     sections: [
       {
         heading: 'What Are Cookies?',
@@ -22,25 +26,29 @@ const legalContent = {
       },
       {
         heading: 'Advertising Cookies',
-        content: 'We use Google AdSense to display advertisements. These cookies may track your browsing activity across websites to show you relevant ads. You can opt out of personalized advertising through the consent banner or Google\'s Ad Settings.'
+        content: `We use Google AdSense to display advertisements. These cookies may track your browsing activity across websites to show you relevant ads. You can opt out of personalized advertising through the consent banner or Google's Ad Settings (https://adssettings.google.com).`
       },
       {
         heading: 'Managing Cookies',
-        content: 'You can control cookies through: our consent banner (shown on first visit), your browser settings (to block or delete cookies), and Google\'s privacy tools at https://adssettings.google.com'
+        content: `You can control cookies through: our consent banner (shown on first visit), your browser settings (to block or delete cookies), and Google's privacy tools at https://adssettings.google.com`
       },
       {
         heading: 'Cookie List',
-        content: '_ga, _gid (Google Analytics - 2 years / 24 hours): Used for analytics. __gads, __gpi (Google AdSense - 13 months): Used for advertising. lang_pref (Local - 1 year): Stores your language preference.'
+        content: '_ga, _gid (Google Analytics - 2 years / 24 hours): Used for analytics. __gads, __gpi (Google AdSense - 13 months): Used for advertising. lang_pref (Local - 1 year): Stores your language preference. user_consent_preferences (Local): Stores your cookie consent choices.'
       },
       {
         heading: 'Updates to This Policy',
         content: 'We may update this Cookie Policy periodically. Check the "last updated" date for the most current version.'
+      },
+      {
+        heading: 'Contact',
+        content: `For any questions about our use of cookies, contact us at: ${COMPANY_EMAIL}`
       }
     ]
   },
   fr: {
     title: 'Politique des Cookies',
-    lastUpdated: 'Dernière mise à jour : Décembre 2024',
+    lastUpdated: 'Dernière mise à jour : Janvier 2025',
     sections: [
       {
         heading: 'Qu\'est-ce qu\'un Cookie ?',
@@ -56,7 +64,7 @@ const legalContent = {
       },
       {
         heading: 'Cookies Publicitaires',
-        content: 'Nous utilisons Google AdSense pour afficher des publicités. Ces cookies peuvent suivre votre activité de navigation sur les sites pour vous montrer des publicités pertinentes. Vous pouvez refuser la publicité personnalisée via la bannière de consentement ou les paramètres publicitaires de Google.'
+        content: 'Nous utilisons Google AdSense pour afficher des publicités. Ces cookies peuvent suivre votre activité de navigation sur les sites pour vous montrer des publicités pertinentes. Vous pouvez refuser la publicité personnalisée via la bannière de consentement ou les paramètres publicitaires de Google (https://adssettings.google.com).'
       },
       {
         heading: 'Gestion des Cookies',
@@ -64,17 +72,21 @@ const legalContent = {
       },
       {
         heading: 'Liste des Cookies',
-        content: '_ga, _gid (Google Analytics - 2 ans / 24 heures) : Utilisés pour l\'analyse. __gads, __gpi (Google AdSense - 13 mois) : Utilisés pour la publicité. lang_pref (Local - 1 an) : Stocke votre préférence de langue.'
+        content: '_ga, _gid (Google Analytics - 2 ans / 24 heures) : Utilisés pour l\'analyse. __gads, __gpi (Google AdSense - 13 mois) : Utilisés pour la publicité. lang_pref (Local - 1 an) : Stocke votre préférence de langue. user_consent_preferences (Local) : Stocke vos choix de consentement aux cookies.'
       },
       {
         heading: 'Mises à Jour de cette Politique',
         content: 'Nous pouvons mettre à jour cette Politique des Cookies périodiquement. Vérifiez la date de "dernière mise à jour" pour la version la plus récente.'
+      },
+      {
+        heading: 'Contact',
+        content: `Pour toute question sur notre utilisation des cookies, contactez-nous à : ${COMPANY_EMAIL}`
       }
     ]
   },
   es: {
     title: 'Política de Cookies',
-    lastUpdated: 'Última actualización: Diciembre 2024',
+    lastUpdated: 'Última actualización: Enero 2025',
     sections: [
       {
         heading: '¿Qué son las Cookies?',
@@ -90,7 +102,7 @@ const legalContent = {
       },
       {
         heading: 'Cookies de Publicidad',
-        content: 'Usamos Google AdSense para mostrar anuncios. Estas cookies pueden rastrear su actividad de navegación en sitios web para mostrarle anuncios relevantes. Puede optar por no recibir publicidad personalizada a través del banner de consentimiento o la Configuración de Anuncios de Google.'
+        content: 'Usamos Google AdSense para mostrar anuncios. Estas cookies pueden rastrear su actividad de navegación en sitios web para mostrarle anuncios relevantes. Puede optar por no recibir publicidad personalizada a través del banner de consentimiento o la Configuración de Anuncios de Google (https://adssettings.google.com).'
       },
       {
         heading: 'Gestión de Cookies',
@@ -98,26 +110,32 @@ const legalContent = {
       },
       {
         heading: 'Lista de Cookies',
-        content: '_ga, _gid (Google Analytics - 2 años / 24 horas): Usadas para análisis. __gads, __gpi (Google AdSense - 13 meses): Usadas para publicidad. lang_pref (Local - 1 año): Almacena su preferencia de idioma.'
+        content: '_ga, _gid (Google Analytics - 2 años / 24 horas): Usadas para análisis. __gads, __gpi (Google AdSense - 13 meses): Usadas para publicidad. lang_pref (Local - 1 año): Almacena su preferencia de idioma. user_consent_preferences (Local): Almacena sus elecciones de consentimiento de cookies.'
       },
       {
         heading: 'Actualizaciones de esta Política',
         content: 'Podemos actualizar esta Política de Cookies periódicamente. Verifique la fecha de "última actualización" para la versión más reciente.'
+      },
+      {
+        heading: 'Contacto',
+        content: `Para cualquier pregunta sobre nuestro uso de cookies, contáctenos en: ${COMPANY_EMAIL}`
       }
     ]
   }
 };
 
+type SupportedLang = keyof typeof legalContent;
+
 const Cookies = () => {
   const { language } = useLanguage();
-  const content = legalContent[language] || legalContent.en;
+  const content = legalContent[language as SupportedLang] || legalContent.en;
 
   return (
     <>
       <Helmet>
-        <title>{content.title} | NumerologyHub</title>
-        <meta name="description" content={`${content.title} for NumerologyHub - Business Numerology Calculator`} />
-        <link rel="canonical" href={`https://numerologyhub.com/${language}/legal/cookies`} />
+        <title>{content.title} | {COMPANY_NAME}</title>
+        <meta name="description" content={`${content.title} for ${COMPANY_NAME} - Business Numerology Calculator`} />
+        <link rel="canonical" href={`${SITE_URL}/${language}/legal/cookies`} />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 

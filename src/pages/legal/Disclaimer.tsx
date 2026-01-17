@@ -4,15 +4,19 @@ import { useLanguage } from '@/i18n';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+const COMPANY_NAME = 'NumerologyForBiz.com';
+const COMPANY_EMAIL = 'contact@numerologyforbiz.com';
+const SITE_URL = 'https://numerologyforbiz.com';
+
 const disclaimerContent = {
   en: {
     title: 'Disclaimer',
-    lastUpdated: 'Last updated: December 2024',
+    lastUpdated: 'Last updated: January 2025',
     importantNotice: 'Important Notice',
     sections: [
       {
         heading: 'Entertainment and Informational Purposes Only',
-        content: 'All numerology readings, analyses, and results provided by NumerologyHub are for entertainment and informational purposes only. Numerology is a belief system based on the mystical relationship between numbers and events. It is not a science and should not be treated as such.'
+        content: `All numerology readings, analyses, and results provided by ${COMPANY_NAME} are for entertainment and informational purposes only. Numerology is a belief system based on the mystical relationship between numbers and events. It is not a science and should not be treated as such.`
       },
       {
         heading: 'Not Professional Advice',
@@ -24,7 +28,7 @@ const disclaimerContent = {
       },
       {
         heading: 'Individual Responsibility',
-        content: 'You are solely responsible for any decisions you make based on the information provided by our tools. NumerologyHub and its operators will not be held liable for any outcomes resulting from the use of our services.'
+        content: `You are solely responsible for any decisions you make based on the information provided by our tools. ${COMPANY_NAME} and its operators will not be held liable for any outcomes resulting from the use of our services.`
       },
       {
         heading: 'Cultural and Personal Beliefs',
@@ -33,17 +37,21 @@ const disclaimerContent = {
       {
         heading: 'Third-Party Content',
         content: 'This website may contain advertisements and links to third-party websites. We are not responsible for the content, accuracy, or opinions expressed on these external sites.'
+      },
+      {
+        heading: 'Contact',
+        content: `For any questions, contact us at: ${COMPANY_EMAIL}`
       }
     ]
   },
   fr: {
     title: 'Avertissement',
-    lastUpdated: 'Dernière mise à jour : Décembre 2024',
+    lastUpdated: 'Dernière mise à jour : Janvier 2025',
     importantNotice: 'Avis Important',
     sections: [
       {
         heading: 'Divertissement et Information Uniquement',
-        content: 'Toutes les lectures, analyses et résultats de numérologie fournis par NumerologyHub sont uniquement à des fins de divertissement et d\'information. La numérologie est un système de croyances basé sur la relation mystique entre les nombres et les événements. Ce n\'est pas une science et ne doit pas être traitée comme telle.'
+        content: `Toutes les lectures, analyses et résultats de numérologie fournis par ${COMPANY_NAME} sont uniquement à des fins de divertissement et d'information. La numérologie est un système de croyances basé sur la relation mystique entre les nombres et les événements. Ce n'est pas une science et ne doit pas être traitée comme telle.`
       },
       {
         heading: 'Pas de Conseil Professionnel',
@@ -55,7 +63,7 @@ const disclaimerContent = {
       },
       {
         heading: 'Responsabilité Individuelle',
-        content: 'Vous êtes seul responsable de toutes les décisions que vous prenez sur la base des informations fournies par nos outils. NumerologyHub et ses opérateurs ne seront pas tenus responsables des résultats découlant de l\'utilisation de nos services.'
+        content: `Vous êtes seul responsable de toutes les décisions que vous prenez sur la base des informations fournies par nos outils. ${COMPANY_NAME} et ses opérateurs ne seront pas tenus responsables des résultats découlant de l'utilisation de nos services.`
       },
       {
         heading: 'Croyances Culturelles et Personnelles',
@@ -64,17 +72,21 @@ const disclaimerContent = {
       {
         heading: 'Contenu Tiers',
         content: 'Ce site peut contenir des publicités et des liens vers des sites tiers. Nous ne sommes pas responsables du contenu, de l\'exactitude ou des opinions exprimées sur ces sites externes.'
+      },
+      {
+        heading: 'Contact',
+        content: `Pour toute question, contactez-nous à : ${COMPANY_EMAIL}`
       }
     ]
   },
   es: {
     title: 'Aviso Legal',
-    lastUpdated: 'Última actualización: Diciembre 2024',
+    lastUpdated: 'Última actualización: Enero 2025',
     importantNotice: 'Aviso Importante',
     sections: [
       {
         heading: 'Solo para Entretenimiento e Información',
-        content: 'Todas las lecturas, análisis y resultados de numerología proporcionados por NumerologyHub son solo para entretenimiento e información. La numerología es un sistema de creencias basado en la relación mística entre números y eventos. No es una ciencia y no debe tratarse como tal.'
+        content: `Todas las lecturas, análisis y resultados de numerología proporcionados por ${COMPANY_NAME} son solo para entretenimiento e información. La numerología es un sistema de creencias basado en la relación mística entre números y eventos. No es una ciencia y no debe tratarse como tal.`
       },
       {
         heading: 'No es Asesoramiento Profesional',
@@ -86,7 +98,7 @@ const disclaimerContent = {
       },
       {
         heading: 'Responsabilidad Individual',
-        content: 'Usted es el único responsable de cualquier decisión que tome basándose en la información proporcionada por nuestras herramientas. NumerologyHub y sus operadores no serán responsables de ningún resultado derivado del uso de nuestros servicios.'
+        content: `Usted es el único responsable de cualquier decisión que tome basándose en la información proporcionada por nuestras herramientas. ${COMPANY_NAME} y sus operadores no serán responsables de ningún resultado derivado del uso de nuestros servicios.`
       },
       {
         heading: 'Creencias Culturales y Personales',
@@ -95,21 +107,27 @@ const disclaimerContent = {
       {
         heading: 'Contenido de Terceros',
         content: 'Este sitio web puede contener anuncios y enlaces a sitios web de terceros. No somos responsables del contenido, exactitud u opiniones expresadas en estos sitios externos.'
+      },
+      {
+        heading: 'Contacto',
+        content: `Para cualquier pregunta, contáctenos en: ${COMPANY_EMAIL}`
       }
     ]
   }
 };
 
+type SupportedLang = keyof typeof disclaimerContent;
+
 const Disclaimer = () => {
   const { language } = useLanguage();
-  const content = disclaimerContent[language] || disclaimerContent.en;
+  const content = disclaimerContent[language as SupportedLang] || disclaimerContent.en;
 
   return (
     <>
       <Helmet>
-        <title>{content.title} | NumerologyHub</title>
-        <meta name="description" content={`${content.title} for NumerologyHub - Numerology is for entertainment purposes only`} />
-        <link rel="canonical" href={`https://numerologyhub.com/${language}/legal/disclaimer`} />
+        <title>{content.title} | {COMPANY_NAME}</title>
+        <meta name="description" content={`${content.title} for ${COMPANY_NAME} - Numerology is for entertainment purposes only`} />
+        <link rel="canonical" href={`${SITE_URL}/${language}/legal/disclaimer`} />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 
