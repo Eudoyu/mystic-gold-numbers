@@ -10,6 +10,8 @@ import {
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/i18n';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 interface PricingModalProps {
   open: boolean;
@@ -20,7 +22,7 @@ interface PricingModalProps {
 const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
   const { settings } = useSiteSettings();
   const { user } = useAuth();
-  const { getLocalePath } = useLanguage();
+  const { getLocalePath, language } = useLanguage();
   const [loading, setLoading] = useState<'sprint' | 'pro' | null>(null);
 
   const handleCheckout = async (plan: 'sprint' | 'pro') => {
@@ -32,12 +34,32 @@ const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
 
     setLoading(plan);
     
-    // TODO: Integrate with Polar checkout when edge function is set up
-    // For now, show a placeholder
-    setTimeout(() => {
+    try {
+      const successUrl = `${window.location.origin}/${language}?checkout=success`;
+      const cancelUrl = `${window.location.origin}/${language}?checkout=cancel`;
+
+      const { data, error } = await supabase.functions.invoke('polar-checkout', {
+        body: { plan, successUrl, cancelUrl },
+      });
+
+      if (error) {
+        console.error('Checkout error:', error);
+        toast.error('Failed to start checkout. Please try again.');
+        return;
+      }
+
+      if (data?.checkoutUrl) {
+        // Redirect to Polar checkout
+        window.location.href = data.checkoutUrl;
+      } else {
+        toast.error('Checkout not available. Please contact support.');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      toast.error('An error occurred. Please try again.');
+    } finally {
       setLoading(null);
-      alert(`Polar checkout for ${plan} plan would open here. Configure POLAR_ACCESS_TOKEN to enable.`);
-    }, 1000);
+    }
   };
 
   const sprintPrice = settings?.sprint_price || 19;
