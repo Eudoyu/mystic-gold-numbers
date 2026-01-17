@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - Calculadora de Numerologia Empresarial",
+    "description": "Calculadora profissional de numerologia empresarial. Analise nomes de empresas, slogans e compatibilidade de parceiros."
+  },
+  "nav": {
+    "home": "Início",
+    "businessName": "Nome da Empresa",
+    "sloganAnalyzer": "Analisador de Slogan",
+    "compatibility": "Compatibilidade",
+    "partnerCheck": "Verificação de Parceiro",
+    "nameComparison": "Comparação de Nomes",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Descubra o poder oculto do nome da sua empresa",
+    "subtitle": "Use sistemas ancestrais de numerologia para analisar a vibração energética do seu negócio"
+  },
+  "calculator": {
+    "enterName": "Digite o nome da empresa",
+    "placeholder": "Nome da sua empresa",
+    "analyze": "Analisar",
+    "calculating": "Calculando..."
+  },
+  "systems": {
+    "pythagorean": "Pitagórico",
+    "chaldean": "Caldeu",
+    "gematria": "Gematria",
+    "pythagoreanDesc": "Sistema ocidental clássico baseado nos ensinamentos de Pitágoras",
+    "chaldeanDesc": "Sistema babilônico antigo focado em vibrações sonoras",
+    "gematriaDesc": "Sistema místico hebraico para interpretar valores numéricos"
+  },
+  "results": {
+    "yourNumber": "Seu Número",
+    "meaning": "Significado",
+    "recommendation": "Recomendação"
+  },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "q1": "O que é numerologia empresarial?",
+    "a1": "Numerologia empresarial é a aplicação de princípios numerológicos a nomes de empresas."
+  },
+  "footer": {
+    "tagline": "Desbloqueie o potencial numerológico do seu negócio",
+    "calculators": "Calculadoras",
+    "resources": "Recursos",
+    "legal": "Legal",
+    "copyright": "Todos os direitos reservados.",
+    "madeWith": "Feito com"
+  },
+  "legal": {
+    "privacy": "Privacidade",
+    "terms": "Termos",
+    "cookies": "Cookies",
+    "disclaimer": "Aviso Legal"
+  },
+  "newsletter": {
+    "title": "Assine nossa newsletter",
+    "placeholder": "Seu email",
+    "subscribe": "Assinar"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar"
+  }
+}

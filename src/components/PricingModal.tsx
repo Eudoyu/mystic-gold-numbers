@@ -1,0 +1,166 @@
+import { useState } from 'react';
+import { Check, Zap, Crown, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
+import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/i18n';
+
+interface PricingModalProps {
+  open: boolean;
+  onClose: () => void;
+  highlightPlan?: 'sprint' | 'pro';
+}
+
+const PricingModal = ({ open, onClose, highlightPlan }: PricingModalProps) => {
+  const { settings } = useSiteSettings();
+  const { user } = useAuth();
+  const { getLocalePath } = useLanguage();
+  const [loading, setLoading] = useState<'sprint' | 'pro' | null>(null);
+
+  const handleCheckout = async (plan: 'sprint' | 'pro') => {
+    if (!user) {
+      // Redirect to auth
+      window.location.href = getLocalePath('/auth');
+      return;
+    }
+
+    setLoading(plan);
+    
+    // TODO: Integrate with Polar checkout when edge function is set up
+    // For now, show a placeholder
+    setTimeout(() => {
+      setLoading(null);
+      alert(`Polar checkout for ${plan} plan would open here. Configure POLAR_ACCESS_TOKEN to enable.`);
+    }, 1000);
+  };
+
+  const sprintPrice = settings?.sprint_price || 19;
+  const proPrice = settings?.pro_price || 14.90;
+
+  return (
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-[700px] bg-card border-border">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-display text-center">
+            Unlock Premium Features
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="grid md:grid-cols-2 gap-6 mt-6">
+          {/* Sprint Plan */}
+          <div className={`relative p-6 rounded-xl border-2 transition-all ${
+            highlightPlan === 'sprint' 
+              ? 'border-primary bg-primary/5' 
+              : 'border-border hover:border-primary/50'
+          }`}>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Sprint 72H</h3>
+                <p className="text-sm text-muted-foreground">One-time purchase</p>
+              </div>
+            </div>
+            
+            <div className="mb-6">
+              <span className="text-3xl font-bold">${sprintPrice}</span>
+              <span className="text-muted-foreground"> / 72 hours</span>
+            </div>
+
+            <ul className="space-y-3 mb-6">
+              <li className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-primary" />
+                Chaldean Numerology
+              </li>
+              <li className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-primary" />
+                Hebrew Gematria
+              </li>
+              <li className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-primary" />
+                Unlimited calculations
+              </li>
+              <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                <X className="w-4 h-4" />
+                Matrix of Convergence
+              </li>
+            </ul>
+
+            <Button 
+              className="w-full" 
+              variant={highlightPlan === 'sprint' ? 'default' : 'outline'}
+              onClick={() => handleCheckout('sprint')}
+              disabled={loading !== null}
+            >
+              {loading === 'sprint' ? 'Loading...' : 'Get Sprint Access'}
+            </Button>
+          </div>
+
+          {/* Pro Plan */}
+          <div className={`relative p-6 rounded-xl border-2 transition-all ${
+            highlightPlan === 'pro' 
+              ? 'border-primary bg-primary/5' 
+              : 'border-border hover:border-primary/50'
+          }`}>
+            {highlightPlan !== 'sprint' && (
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                Most Popular
+              </div>
+            )}
+            
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <Crown className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Pro</h3>
+                <p className="text-sm text-muted-foreground">Monthly subscription</p>
+              </div>
+            </div>
+            
+            <div className="mb-6">
+              <span className="text-3xl font-bold">${proPrice}</span>
+              <span className="text-muted-foreground"> / month</span>
+            </div>
+
+            <ul className="space-y-3 mb-6">
+              <li className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-primary" />
+                All Sprint features
+              </li>
+              <li className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-primary" />
+                Matrix of Convergence
+              </li>
+              <li className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-primary" />
+                Partner Compatibility
+              </li>
+              <li className="flex items-center gap-2 text-sm">
+                <Check className="w-4 h-4 text-primary" />
+                AI-Generated Reports
+              </li>
+            </ul>
+
+            <Button 
+              className="w-full" 
+              onClick={() => handleCheckout('pro')}
+              disabled={loading !== null}
+            >
+              {loading === 'pro' ? 'Loading...' : 'Subscribe to Pro'}
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default PricingModal;

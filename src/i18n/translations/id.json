@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - Kalkulator Numerologi Bisnis",
+    "description": "Kalkulator numerologi bisnis profesional. Analisis nama bisnis, slogan pemasaran, dan kompatibilitas mitra."
+  },
+  "nav": {
+    "home": "Beranda",
+    "businessName": "Nama Bisnis",
+    "sloganAnalyzer": "Penganalisis Slogan",
+    "compatibility": "Kompatibilitas",
+    "partnerCheck": "Pemeriksaan Mitra",
+    "nameComparison": "Perbandingan Nama",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Temukan kekuatan tersembunyi dalam nama bisnis Anda",
+    "subtitle": "Gunakan sistem numerologi kuno untuk menganalisis getaran energi bisnis Anda"
+  },
+  "calculator": {
+    "enterName": "Masukkan nama bisnis",
+    "placeholder": "Nama bisnis Anda",
+    "analyze": "Analisis",
+    "calculating": "Menghitung..."
+  },
+  "systems": {
+    "pythagorean": "Pythagoras",
+    "chaldean": "Kaldea",
+    "gematria": "Gematria",
+    "pythagoreanDesc": "Sistem Barat klasik berdasarkan ajaran Pythagoras",
+    "chaldeanDesc": "Sistem Babilonia kuno yang berfokus pada getaran suara",
+    "gematriaDesc": "Sistem mistis Ibrani untuk menafsirkan nilai numerik"
+  },
+  "results": {
+    "yourNumber": "Nomor Anda",
+    "meaning": "Makna",
+    "recommendation": "Rekomendasi"
+  },
+  "faq": {
+    "title": "Pertanyaan yang Sering Diajukan",
+    "q1": "Apa itu numerologi bisnis?",
+    "a1": "Numerologi bisnis adalah penerapan prinsip numerologi pada nama bisnis."
+  },
+  "footer": {
+    "tagline": "Buka potensi numerologi bisnis Anda",
+    "calculators": "Kalkulator",
+    "resources": "Sumber Daya",
+    "legal": "Hukum",
+    "copyright": "Semua hak dilindungi.",
+    "madeWith": "Dibuat dengan"
+  },
+  "legal": {
+    "privacy": "Privasi",
+    "terms": "Ketentuan",
+    "cookies": "Cookie",
+    "disclaimer": "Penafian"
+  },
+  "newsletter": {
+    "title": "Berlangganan buletin",
+    "placeholder": "Email Anda",
+    "subscribe": "Berlangganan"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Kesalahan",
+    "submit": "Kirim",
+    "cancel": "Batal",
+    "save": "Simpan"
+  }
+}

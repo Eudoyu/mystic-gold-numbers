@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "NumerologyForBiz.com - Business Numerologie Rechner",
+    "description": "Professioneller Business Numerologie Rechner. Analysieren Sie Firmennamen, Marketing-Slogans und Partner-Kompatibilität."
+  },
+  "nav": {
+    "home": "Startseite",
+    "businessName": "Firmenname",
+    "sloganAnalyzer": "Slogan-Analyse",
+    "compatibility": "Kompatibilität",
+    "partnerCheck": "Partner-Check",
+    "nameComparison": "Namenvergleich",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Entdecken Sie die verborgene Kraft Ihres Firmennamens",
+    "subtitle": "Nutzen Sie uralte Numerologie-Systeme, um die energetische Vibration Ihres Unternehmens zu analysieren"
+  },
+  "calculator": {
+    "enterName": "Firmennamen eingeben",
+    "placeholder": "Ihr Firmenname",
+    "analyze": "Analysieren",
+    "calculating": "Berechne..."
+  },
+  "systems": {
+    "pythagorean": "Pythagoräisch",
+    "chaldean": "Chaldäisch",
+    "gematria": "Gematria",
+    "pythagoreanDesc": "Klassisches westliches System basierend auf den Lehren des Pythagoras",
+    "chaldeanDesc": "Altes babylonisches System, fokussiert auf Klangvibrationen",
+    "gematriaDesc": "Hebräisches mystisches System zur Interpretation numerischer Werte"
+  },
+  "results": {
+    "yourNumber": "Ihre Zahl",
+    "meaning": "Bedeutung",
+    "recommendation": "Empfehlung"
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "q1": "Was ist Business Numerologie?",
+    "a1": "Business Numerologie ist die Anwendung numerologischer Prinzipien auf Firmennamen."
+  },
+  "footer": {
+    "tagline": "Erschließen Sie das numerologische Potenzial Ihres Unternehmens",
+    "calculators": "Rechner",
+    "resources": "Ressourcen",
+    "legal": "Rechtliches",
+    "copyright": "Alle Rechte vorbehalten.",
+    "madeWith": "Gemacht mit"
+  },
+  "legal": {
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "cookies": "Cookies",
+    "disclaimer": "Haftungsausschluss"
+  },
+  "newsletter": {
+    "title": "Newsletter abonnieren",
+    "placeholder": "Ihre E-Mail",
+    "subscribe": "Abonnieren"
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "save": "Speichern"
+  }
+}

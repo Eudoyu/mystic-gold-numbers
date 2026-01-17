@@ -4,18 +4,38 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import en from './translations/en.json';
 import fr from './translations/fr.json';
 import es from './translations/es.json';
+import de from './translations/de.json';
+import pt from './translations/pt.json';
+import ja from './translations/ja.json';
+import ar from './translations/ar.json';
+import it from './translations/it.json';
+import hi from './translations/hi.json';
+import ko from './translations/ko.json';
+import nl from './translations/nl.json';
+import tr from './translations/tr.json';
+import id from './translations/id.json';
 
-export type Language = 'en' | 'fr' | 'es';
+export type Language = 'en' | 'fr' | 'es' | 'de' | 'pt' | 'ja' | 'ar' | 'it' | 'hi' | 'ko' | 'nl' | 'tr' | 'id';
 
 type TranslationValue = string | { [key: string]: TranslationValue };
 type Translations = { [key: string]: TranslationValue };
 
-const translations: Record<Language, Translations> = { en, fr, es };
+const translations: Record<Language, Translations> = { en, fr, es, de, pt, ja, ar, it, hi, ko, nl, tr, id };
 
 export const languages: { code: Language; label: string; flag: string; locale: string }[] = [
   { code: 'en', label: 'English', flag: '🇬🇧', locale: 'en_US' },
   { code: 'fr', label: 'Français', flag: '🇫🇷', locale: 'fr_FR' },
   { code: 'es', label: 'Español', flag: '🇪🇸', locale: 'es_ES' },
+  { code: 'de', label: 'Deutsch', flag: '🇩🇪', locale: 'de_DE' },
+  { code: 'pt', label: 'Português', flag: '🇧🇷', locale: 'pt_BR' },
+  { code: 'ja', label: '日本語', flag: '🇯🇵', locale: 'ja_JP' },
+  { code: 'ar', label: 'العربية', flag: '🇸🇦', locale: 'ar_SA' },
+  { code: 'it', label: 'Italiano', flag: '🇮🇹', locale: 'it_IT' },
+  { code: 'hi', label: 'हिन्दी', flag: '🇮🇳', locale: 'hi_IN' },
+  { code: 'ko', label: '한국어', flag: '🇰🇷', locale: 'ko_KR' },
+  { code: 'nl', label: 'Nederlands', flag: '🇳🇱', locale: 'nl_NL' },
+  { code: 'tr', label: 'Türkçe', flag: '🇹🇷', locale: 'tr_TR' },
+  { code: 'id', label: 'Bahasa', flag: '🇮🇩', locale: 'id_ID' },
 ];
 
 interface LanguageContextType {
@@ -53,7 +73,7 @@ const detectBrowserLanguage = (): Language => {
 
 // Extract language from URL path
 const extractLanguageFromPath = (pathname: string): Language | null => {
-  const match = pathname.match(/^\/(en|fr|es)(\/|$)/);
+  const match = pathname.match(/^\/(en|fr|es|de|pt|ja|ar|it|hi|ko|nl|tr|id)(\/|$)/);
   return match ? (match[1] as Language) : null;
 };
 
