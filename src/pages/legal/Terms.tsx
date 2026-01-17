@@ -7,10 +7,19 @@ const COMPANY_NAME = 'NumerologyForBiz.com';
 const COMPANY_EMAIL = 'contact@numerologyforbiz.com';
 const SITE_URL = 'https://numerologyforbiz.com';
 
+// Legal entity operating this website
+const OPERATOR_INFO = {
+  name: 'EUDOYU SARL-S',
+  address: '303 rue de Neudorf, Luxembourg',
+  authorization: '10151674 / 0'
+};
+
 const legalContent = {
   en: {
     title: 'Terms of Service',
     lastUpdated: 'Last updated: January 2025',
+    operatorTitle: 'Website Operator',
+    operatorText: `This website (${COMPANY_NAME}) is operated by: ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Authorization Number: ${OPERATOR_INFO.authorization}. Contact: ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: '1. Acceptance of Terms',
@@ -18,7 +27,7 @@ const legalContent = {
       },
       {
         heading: '2. Service Provider',
-        content: `This website is operated by ${COMPANY_NAME}. For any inquiries, please contact us at: ${COMPANY_EMAIL}`
+        content: `This website is operated by ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}, Authorization Number: ${OPERATOR_INFO.authorization}. For any inquiries, please contact us at: ${COMPANY_EMAIL}`
       },
       {
         heading: '3. Description of Service',
@@ -61,6 +70,8 @@ const legalContent = {
   fr: {
     title: 'Conditions d\'Utilisation',
     lastUpdated: 'Dernière mise à jour : Janvier 2025',
+    operatorTitle: 'Exploitant du Site',
+    operatorText: `Ce site web (${COMPANY_NAME}) est exploité par : ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Numéro d'autorisation : ${OPERATOR_INFO.authorization}. Contact : ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: '1. Acceptation des Conditions',
@@ -68,7 +79,7 @@ const legalContent = {
       },
       {
         heading: '2. Éditeur du Service',
-        content: `Ce site est exploité par ${COMPANY_NAME}. Pour toute demande, veuillez nous contacter à : ${COMPANY_EMAIL}`
+        content: `Ce site est exploité par ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}, Numéro d'autorisation : ${OPERATOR_INFO.authorization}. Pour toute demande, veuillez nous contacter à : ${COMPANY_EMAIL}`
       },
       {
         heading: '3. Description du Service',
@@ -111,6 +122,8 @@ const legalContent = {
   es: {
     title: 'Términos de Servicio',
     lastUpdated: 'Última actualización: Enero 2025',
+    operatorTitle: 'Operador del Sitio Web',
+    operatorText: `Este sitio web (${COMPANY_NAME}) es operado por: ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Número de Autorización: ${OPERATOR_INFO.authorization}. Contacto: ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: '1. Aceptación de Términos',
@@ -118,7 +131,7 @@ const legalContent = {
       },
       {
         heading: '2. Proveedor del Servicio',
-        content: `Este sitio web es operado por ${COMPANY_NAME}. Para cualquier consulta, contáctenos en: ${COMPANY_EMAIL}`
+        content: `Este sitio web es operado por ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}, Número de Autorización: ${OPERATOR_INFO.authorization}. Para cualquier consulta, contáctenos en: ${COMPANY_EMAIL}`
       },
       {
         heading: '3. Descripción del Servicio',
@@ -183,8 +196,17 @@ const Terms = () => {
             <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 gold-text">
               {content.title}
             </h1>
-            <p className="text-muted-foreground mb-12">{content.lastUpdated}</p>
+            <p className="text-muted-foreground mb-8">{content.lastUpdated}</p>
 
+            {/* Website Operator Info */}
+            <div className="mystic-card p-6 mb-8 bg-muted/30">
+              <h2 className="font-display text-xl font-semibold text-foreground mb-2">
+                {content.operatorTitle}
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                {content.operatorText}
+              </p>
+            </div>
             <div className="space-y-8">
               {content.sections.map((section, index) => (
                 <div key={index} className="mystic-card p-6">
