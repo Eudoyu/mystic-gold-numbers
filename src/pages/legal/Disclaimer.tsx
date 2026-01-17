@@ -8,11 +8,20 @@ const COMPANY_NAME = 'NumerologyForBiz.com';
 const COMPANY_EMAIL = 'contact@numerologyforbiz.com';
 const SITE_URL = 'https://numerologyforbiz.com';
 
+// Legal entity operating this website
+const OPERATOR_INFO = {
+  name: 'EUDOYU SARL-S',
+  address: '303 rue de Neudorf, Luxembourg',
+  authorization: '10151674 / 0'
+};
+
 const disclaimerContent = {
   en: {
     title: 'Disclaimer',
     lastUpdated: 'Last updated: January 2025',
     importantNotice: 'Important Notice',
+    operatorTitle: 'Website Operator',
+    operatorText: `This website (${COMPANY_NAME}) is operated by: ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Authorization Number: ${OPERATOR_INFO.authorization}. Contact: ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: 'Entertainment and Informational Purposes Only',
@@ -48,6 +57,8 @@ const disclaimerContent = {
     title: 'Avertissement',
     lastUpdated: 'Dernière mise à jour : Janvier 2025',
     importantNotice: 'Avis Important',
+    operatorTitle: 'Exploitant du Site',
+    operatorText: `Ce site web (${COMPANY_NAME}) est exploité par : ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Numéro d'autorisation : ${OPERATOR_INFO.authorization}. Contact : ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: 'Divertissement et Information Uniquement',
@@ -83,6 +94,8 @@ const disclaimerContent = {
     title: 'Aviso Legal',
     lastUpdated: 'Última actualización: Enero 2025',
     importantNotice: 'Aviso Importante',
+    operatorTitle: 'Operador del Sitio Web',
+    operatorText: `Este sitio web (${COMPANY_NAME}) es operado por: ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Número de Autorización: ${OPERATOR_INFO.authorization}. Contacto: ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: 'Solo para Entretenimiento e Información',
@@ -141,6 +154,15 @@ const Disclaimer = () => {
             </h1>
             <p className="text-muted-foreground mb-8">{content.lastUpdated}</p>
 
+            {/* Website Operator Info */}
+            <div className="mystic-card p-6 mb-8 bg-muted/30">
+              <h2 className="font-display text-xl font-semibold text-foreground mb-2">
+                {content.operatorTitle}
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                {content.operatorText}
+              </p>
+            </div>
             {/* Important Notice Box */}
             <div className="mystic-card p-6 mb-8 border-primary/50">
               <div className="flex items-start gap-4">

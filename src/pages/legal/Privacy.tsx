@@ -7,14 +7,23 @@ const COMPANY_NAME = 'NumerologyForBiz.com';
 const COMPANY_EMAIL = 'contact@numerologyforbiz.com';
 const SITE_URL = 'https://numerologyforbiz.com';
 
+// Legal entity operating this website
+const OPERATOR_INFO = {
+  name: 'EUDOYU SARL-S',
+  address: '303 rue de Neudorf, Luxembourg',
+  authorization: '10151674 / 0'
+};
+
 const legalContent = {
   en: {
     title: 'Privacy Policy',
     lastUpdated: 'Last updated: January 2025',
+    operatorTitle: 'Website Operator',
+    operatorText: `This website (${COMPANY_NAME}) is operated by: ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Authorization Number: ${OPERATOR_INFO.authorization}. Contact: ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: '1. Data Controller',
-        content: `The data controller for this website is ${COMPANY_NAME}. For any privacy-related inquiries, please contact us at: ${COMPANY_EMAIL}`
+        content: `The data controller for this website is ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}, Authorization Number: ${OPERATOR_INFO.authorization}. For any privacy-related inquiries, please contact us at: ${COMPANY_EMAIL}`
       },
       {
         heading: '2. Information We Collect',
@@ -53,10 +62,12 @@ const legalContent = {
   fr: {
     title: 'Politique de Confidentialité',
     lastUpdated: 'Dernière mise à jour : Janvier 2025',
+    operatorTitle: 'Exploitant du Site',
+    operatorText: `Ce site web (${COMPANY_NAME}) est exploité par : ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Numéro d'autorisation : ${OPERATOR_INFO.authorization}. Contact : ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: '1. Responsable du Traitement',
-        content: `Le responsable du traitement des données pour ce site est ${COMPANY_NAME}. Pour toute question relative à la confidentialité, veuillez nous contacter à : ${COMPANY_EMAIL}`
+        content: `Le responsable du traitement des données pour ce site est ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}, Numéro d'autorisation : ${OPERATOR_INFO.authorization}. Pour toute question relative à la confidentialité, veuillez nous contacter à : ${COMPANY_EMAIL}`
       },
       {
         heading: '2. Informations Collectées',
@@ -95,10 +106,12 @@ const legalContent = {
   es: {
     title: 'Política de Privacidad',
     lastUpdated: 'Última actualización: Enero 2025',
+    operatorTitle: 'Operador del Sitio Web',
+    operatorText: `Este sitio web (${COMPANY_NAME}) es operado por: ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}. Número de Autorización: ${OPERATOR_INFO.authorization}. Contacto: ${COMPANY_EMAIL}`,
     sections: [
       {
         heading: '1. Responsable del Tratamiento',
-        content: `El responsable del tratamiento de datos para este sitio web es ${COMPANY_NAME}. Para cualquier consulta relacionada con la privacidad, contáctenos en: ${COMPANY_EMAIL}`
+        content: `El responsable del tratamiento de datos para este sitio web es ${OPERATOR_INFO.name}, ${OPERATOR_INFO.address}, Número de Autorización: ${OPERATOR_INFO.authorization}. Para cualquier consulta relacionada con la privacidad, contáctenos en: ${COMPANY_EMAIL}`
       },
       {
         heading: '2. Información que Recopilamos',
@@ -159,8 +172,17 @@ const Privacy = () => {
             <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 gold-text">
               {content.title}
             </h1>
-            <p className="text-muted-foreground mb-12">{content.lastUpdated}</p>
+            <p className="text-muted-foreground mb-8">{content.lastUpdated}</p>
 
+            {/* Website Operator Info */}
+            <div className="mystic-card p-6 mb-8 bg-muted/30">
+              <h2 className="font-display text-xl font-semibold text-foreground mb-2">
+                {content.operatorTitle}
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                {content.operatorText}
+              </p>
+            </div>
             <div className="space-y-8">
               {content.sections.map((section, index) => (
                 <div key={index} className="mystic-card p-6">
